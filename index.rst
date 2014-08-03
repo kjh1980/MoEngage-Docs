@@ -1,16 +1,14 @@
-.. MoEngage Docs documentation master file, created by
-   sphinx-quickstart on Sun Aug  3 06:10:48 2014.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+==============================
+MoEngage Developer Documentation
+==============================
 
-Welcome to MoEngage Developer documentation!
-=========================================
+**MoEnage** is a Mobile App Engagement and Marketing platform for Mobile app companies to improve engagement and conversions in their apps.
 
-Contents:
+:doc:`introduction`
+  A quick introduction about MoEngage to help you get started.
 
-.. toctree::
-   :maxdepth: 2
-
+:doc:`integration`
+  Integration guide for various mobile platforms like Android, iOS, Windows.
 
 
 Indices and tables
