@@ -1,6 +1,6 @@
 
-MoEngage Documentation for Windows Phone
-=======================================
+Windows Phone Integration guide
+===============================
 
 Adding Jar file to the Android project
 --------------------------------------

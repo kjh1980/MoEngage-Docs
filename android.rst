@@ -41,6 +41,8 @@ In order for the library to work, you need to ensure that you're requesting the 
 
 At this point, you're ready to use the MoEngage SDK inside Eclipse!
 
+
+
 Setting up Push Notifications through GCM
 ----------------------------------------
 
@@ -76,6 +78,8 @@ Your Google API key will appear in this box, after the heading "API Key:".
 
 .. image:: images/4.png
 
+.. _Google's API Console page: https://cloud.google.com/console
+
 Step 2 - Uploading your GCM API Key through MoEngage portal
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -89,6 +93,8 @@ In the Settings page, click on the "App settings" tab. Then paste in your Google
 Click the "Save" button underneath the text fields to confirm.
 
 .. image:: images/6.png
+
+
 
 
 Handling Push Notifications
@@ -132,6 +138,8 @@ app package name.
         </intent-filter>
     </receiver>
 
+
+
 Initializing the SDK and Push Notifications
 -------------------------------------------
 
@@ -142,8 +150,8 @@ Put the following code in the first activity onCreate() method
     MoEHelper mHelper = new MoEHelper(this);
     mHelper.initialize("GCM Sender ID", "MoEngage APP ID");
 
-GCM Sender ID - the ID of the project created as part of Push Registration
-MoEngage APP ID - This is an application specific id, which MoEngage team must have shared with you.
+GCM Sender ID - the twelve digit sender ID of your Google API project.
+MoEngage APP ID - This is an application specific id, which MoEngage team must have shared with you. You can also find it in the 'App Settings' tab of the 'Settings' page of your MoEngage account.
 
 Put the following code after the above initialization code to register for push
 
@@ -151,5 +159,38 @@ Put the following code after the above initialization code to register for push
 
     mHelper.Register(drawableResourceId);
     drawableResourceId - for eg. R.drawable.icon
+
+
+Send a push notification for testing
+------------------------------------
+
+Once you have set up your permissions and set up GCMReciever as a receiver of Google Cloud Messaging notifications in your AndroidManifest.xml file and
+added the initialization code mentioned above, you're ready to send a notification!
+
+Install and run your application on an Android device (not the emulator, it can't receive notifications).
+Make sure to run the app until the calls to the initialization code mentioned above has been run. For apps built
+according to our recommendations, these calls are in the onCreate method of your main application activity, so it is enough to simply open the app. Press the back button to close your app.
+
+Now log in to your MoEngage account and select `Create Campaign`_ from the left-hand navigation, and click on 'General Push Campaign'.
+
+.. _Create Campaign: http://app.moengage.com/newpushcampaign
+
+If this is the first time you are testing MoEngage SDK with your app, you can just set a test message, leave the screen selection part, set the scheduling to run 'as soon as possible' and create the campaign as shown below:
+
+.. image:: images/7.png
+
+.. image:: images/8.png
+
+.. image:: images/9.png
+
+Once the campaign is created, the message should show up on your device.
+
+.. image:: images/10.png
+
+*Note: If MoEngage SDK has been integrated earlier with your app and has been released to your users, please don't create a campaign targeting all users. You can create a campaign targeting only your device by setting the filters based on user attributes.*
+
+
+
+
 
 
