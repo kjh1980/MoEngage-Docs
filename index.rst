@@ -1,23 +1,14 @@
-==============================
+
 MoEngage Developer Documentation
-==============================
+================================
 
 **MoEngage** is a Mobile App Engagement and Marketing platform for Mobile app companies to improve engagement and conversions in their apps.
 
-:doc:`introduction`
-  A quick introduction about MoEngage to help you get started.
+The main documentation for the site is organized into the following sections:
 
-:doc:`android/integration`
-  Integration guide for Android
-  
-:doc:`windows/integration`
-  Integration guide for Windows Phone
+.. toctree::
+    :maxdepth: 2
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
+    introduction
+    android
+    windows
