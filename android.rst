@@ -277,7 +277,7 @@ Testing event tracking after integration
 
 To test event tracking, first you need to login to the MoEngage portal with the credentials provided for your app.
 
-After adding event tracking in the app as shown in the guide above, you can visit `For Developers` link through the MoEngage portal to check whether the events are being tracked, as you use.
+After adding event tracking in the app as shown in the guide above, you can visit `For Developers`_ link through the MoEngage portal to check whether the events are being tracked, as you use.
 .. _For Developers: http://app.moengage.com/latestActivity
 
 .. image:: images/11.png
@@ -371,5 +371,20 @@ as shown in the codes below
         super.onStop();
         MoEHelper.getInstance(this).onStop(this);
     }
+
+
+
+User Acquisition source tracking
+--------------------------------
+
+This helps us to attribute your users with the source through which users found your app. To add Install Attribution (User Acquisition Source) tracking, add the following lines to your manifest:
+
+::
+
+    <receiver android:name="com.moe.pushlibrary.InstallReceiver">
+        <intent-filter>
+            <action android:name="com.android.vending.INSTALL_REFERRER"/>
+            </intent-filter>
+    </receiver>
 
 
