@@ -138,6 +138,35 @@ app package name.
         </intent-filter>
     </receiver>
 
+Requirements for Rich Landing pages through Push notifications (recommended)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can take the user to a mobile-optimized landing page when clicked on the notification. You can have call-to-action button in the page, which takes to the specific screen in App when clicked. It is recommended to add this capability, though your team might not use it immediately.
+
+Put the following activity as part of manifest for this to work:
+
+::
+
+    <activity 
+        android:name="com.moe.pushlibrary.activities.MoEActivity"
+        android:parentActivityName="yourparentactivityname" 
+    >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="yourparentactivityname" 
+        />
+    </activity>
+
+Parent activity name is needed if you want to redirect the user to a particular screen when users click on the up button.
+If you don't want to add the parent activity just include the following lines.
+
+::
+
+    <activity 
+        android:name="com.moe.pushlibrary.activities.MoEActivity" 
+    >
+    </activity>
+
 
 
 Initializing the SDK and Push Notifications
@@ -188,10 +217,159 @@ Once the campaign is created, the message should show up on your device.
 .. image:: images/10.png
    :scale: 50 %
 
+
 *Note: If MoEngage SDK has been integrated earlier with your app and has been released to your users, please don't create a campaign targeting all users. You can create a campaign targeting only your device by setting the filters based on user attributes.*
 
 
+Tracking your first event
+-------------------------
+
+Once you've initialized the SDK, you can track an event using trackEvent with the event name and it's characteristics (attributes).
+
+Every event has 2 attributes, action name and key, value pairs which represent additional information about the action. Add all the additional information which you think would be useful for segmentation while creating campaigns.
+For eg. the following code tracks a purchase event of a product. We are including attributes like amount, quantity, category which describe the event we are tracking.
+
+::
+
+    JSONObject newJson = new JSONObject();
+        try {
+          newJson.put("product", "Moto E");
+          newJson.put("amount", 7000);
+          newJson.put("currency", "Rs.");
+          newJson.put("category", "Mobiles");
+          newJson.put("quantity", 2);
+    } catch (JSONException e) {
+                // json exception
+        }
+    MoEHelper.getInstance(mCurrentContext).trackEvent("Made Purchase", newJson);
+    
+mCurrentContext - context instance, please change the name accordingly
+
+*Please make sure that you are tracking event attributes without changing their data types. For instance, in the above purchase event, amount and quantity are tracked in the numeric form. Our system detects the data type automatically unless you explicitly specify it as a string.*
+
+To pass location as one of the parameters for the event use the following code:
+
+::
+
+    MoEHelperUtils.setLocation(newJson, "attribute name", lat, lng);
+    
+    // 1st argument - json object which contains all the parameters for the event
+    // 2nd argument - attribute name that you want to assign to the location
+    // 3rd, 4th - latitude and longitude of a location.
+    // for instance
+    
+    JSONObject newJson = new JSONObject();
+        try {
+          newJson.put("city", "New York");
+          MoEHelperUtils.setLocation(newJson, "city search", 40.77, 73.98);
+    } catch (JSONException e) {
+                // json exception
+        }
+
+    MoEHelper.getInstance(mCurrentContext).trackEvent("search", newJson);
+
+*You should track all the events relevant to your business, so that your product managers and marketers can segment your app users and create targeted campaigns.*
 
 
+
+Testing event tracking after integration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To test event tracking, first you need to login to the MoEngage portal with the credentials provided for your app.
+
+After adding event tracking in the app as shown in the guide above, you can visit `For Developers` link through the MoEngage portal to check whether the events are being tracked, as you use.
+.. _For Developers: http://app.moengage.com/latestActivity
+
+.. image:: images/11.png
+
+As users use the application, events data is stored locally and sent in regular intervals of 30 seconds to avoid any performance impact. So, you might need to wait for sometime to see the events in the portal.
+
+
+
+
+Setting user attributes
+-------------------------
+
+Use the following lines to set User attributes like Name, Email, Mobile, Gender, etc.
+
+For eg. to set unique id for the user
+
+::
+
+    MoEHelper.getInstance(mCurrentContext).setUserAttribute(MoEHelperConstants.USER_ATTRIBUTE_UNIQUE_ID, uniqueId);
+    
+uniqueId - unique id for the user specific to your system, so that there is a unique identifier mapping between your platform and MoEngage.
+
+You can use MoEHelperConstants class to set the default user attributes like mobile number, gender, user name, brithday. Birthday has to be in the format - "mm/dd/yyyy". The constants for these default attributes in MoEHelperConstants are mentioned below:
+
+::
+
+    USER_ATTRIBUTE_UNIQUE_ID
+    USER_ATTRIBUTE_USER_EMAIL
+    USER_ATTRIBUTE_USER_MOBILE
+    USER_ATTRIBUTE_USER_NAME   # incase you have full name 
+    USER_ATTRIBUTE_USER_GENDER
+    USER_ATTRIBUTE_USER_FIRST_NAME # incase you have first and last name separately
+    USER_ATTRIBUTE_USER_LAST_NAME
+    USER_ATTRIBUTE_USER_BDAY
+    GENDER_MALE = "male";
+    GENDER_FEMALE = "female";
+
+to set user email
+
+::
+
+    MoEHelper.getInstance(mCurrentContext).setUserAttribute(MoEHelperConstants.USER_ATTRIBUTE_USER_EMAIL, email);
+    
+email - email of the user
+
+To set user location, use the following line
+
+::
+
+    MoEHelper.getInstance(mCurrentContext).setUserLocation(lat, lng);
+
+lat - latitude of the location
+lng - longitude of the location
+
+Setting custom user attributes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The above examples demonstrate how to set predefined attributes and their values. To set custom attributes use the following syntax.
+
+::
+
+    MoEHelper.getInstance(mCurrentContext).setUserAttribute(key, value);
+
+key - the name you want to give to the attribute
+value - the value you would like to assign to it
+
+
+
+Tracking user activity
+-------------------------
+
+Put the following code in every activity of the app
+
+::
+
+    // in onStart()
+    MoEHelper.getInstance(this).onStart(this);
+    
+    // in onStop()
+    MoEHelper.getInstance(this).onStop(this);  
+
+as shown in the codes below
+
+::
+
+    protected void onStart() {
+        super.onStart();
+        MoEHelper.getInstance(this).onStart(this);
+    }
+    protected void onStop() {
+        super.onStop();
+        MoEHelper.getInstance(this).onStop(this);
+    }
 
 
