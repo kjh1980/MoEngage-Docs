@@ -2,7 +2,7 @@
 MoEngage Developer Documentation
 ==============================
 
-**MoEngage** is a Mobile App Engagement and Marketing platform for Mobile app companies to improve engagement and conversions in their apps.
+**MoEnage** is a Mobile App Engagement and Marketing platform for Mobile app companies to improve engagement and conversions in their apps.
 
 :doc:`introduction`
   A quick introduction about MoEngage to help you get started.
