@@ -6,7 +6,7 @@ Installing the MoEngage library - Eclipse
 -----------------------------------------
 
 Step 1 - Get the latest MoEngage library release
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You must have received the latest MoEngage SDK from the team. If you have received the SDK, please proceed to the next steps.
 
@@ -16,9 +16,10 @@ Step 2 - Import the SDK into your project's workspace
 Add the given MoEngage-Android-SDK.jar file to the project, by copying the jar file to the libs folder. If there is no libs folder please
 create a libs folder.
 
-Make sure that you have the latest android support jar file (android-support-v4.jar) accessable to the project.
+*Make sure that you have the latest android support jar file (android-support-v4.jar) accessable to the project.*
 
 Step 3 - Add permissions to your AndroidManifest.xml
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In order for the library to work, you need to ensure that you're requesting the following permissions in your AndroidManifest.xml:
 
@@ -43,36 +44,52 @@ At this point, you're ready to use the MoEngage SDK inside Eclipse!
 Setting up Push Notifications through GCM
 ----------------------------------------
 
-Step 1 - Create a Google API project
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+This covers a quick-start guide for setting up push for your Android app that covers setting up your Google API project,
+locating the your project number, uploading your Google API Project key to MoEngage portal.
 
-1. Open the `Google Developers Console`_.
-2. If you havenÕt created an API project yet, click Create Project.
-3. Supply a project name and click Create.
-4. Once the project has been created, a page appears that displays your
-   project ID and project number. For example, Project Number:
-   670330094152.
-5. Copy down your project number. You will use it later on as the GCM
-   sender ID.
-   
-.. _Google Developers Console: https://cloud.google.com/console
+Step 1 - Enabling Google Cloud Messaging (GCM) in your Google API Console
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Step 2 - Enabling the GCM Service
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To enable Google Cloud Messaging (GCM) for Android, there are a few preliminary steps that must be taken.
+You will first need to turn on the Google Cloud Messaging Services from `Google's API Console page`_.
+If you do you not have a Google API project yet, the following pop up will appear prompting you to create a project.
 
-1. In the sidebar on the left, select APIs & auth.
-2. In the displayed list of APIs, turn the Google Cloud Messaging for
-   Android toggle to ON.
+.. image:: images/1.png
 
-Step 3 - Obtaining an API Key
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Click on the "Create Project..." to create a new project. Once you have created a new project (or if you already have an existing project),
+you will be taken to the console's dashboard.
 
-1. In the sidebar on the left, select APIs & auth > Credentials.
-2. Under Public API access, click Create new key.
-3. In the Create a new key dialog, click Server key.
-4. In the resulting configuration dialog, leave the box empty and Click
-   Create.
-5. In the refreshed page, copy the API key and send it to us.
+Once the project has been created, a page appears that displays your project ID and project number. The project number will be your
+twelve digit GCM Sender ID, which you will need to use in your code later to register your application for push notifications.
+
+From the Google API Console page, select "Services" from the left-hand navigation. Find "Google Cloud Messaging for Android" in the list of services,
+and turn it on by clicking the switch in the "Status" column.
+
+.. image:: images/2.png
+
+Create an Google API key. From the Google API Console page, select "Public API Access" from the left navigation and click "Create new Server key...". You should see the following pop up.
+
+.. image:: images/3.png
+
+Click the create button. The next page will contain a "Simple API Access" header, and below the header a "Key for server apps" box.
+Your Google API key will appear in this box, after the heading "API Key:".
+
+.. image:: images/4.png
+
+Step 2 - Uploading your GCM API Key through MoEngage portal
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In order for MoEngage to send Google Cloud Messaging notifications on your behalf, you will need to enter the
+Google API key generated from the last step through MoEngage portal. To upload it, log in to your MoEngage account provided by the team
+and click the Settings button (with the gear icon) on the top-right corner of the screen as shown below:
+
+.. image:: images/5.png
+
+In the Settings page, click on the "App settings" tab. Then paste in your Google API key into the text field that appears for GCM key.
+Click the "Save" button underneath the text fields to confirm.
+
+.. image:: images/6.png
+
 
 Handling Push Notifications
 ---------------------------
