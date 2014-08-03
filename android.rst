@@ -186,6 +186,7 @@ If this is the first time you are testing MoEngage SDK with your app, you can ju
 Once the campaign is created, the message should show up on your device.
 
 .. image:: images/10.png
+   :scale: 50 %
 
 *Note: If MoEngage SDK has been integrated earlier with your app and has been released to your users, please don't create a campaign targeting all users. You can create a campaign targeting only your device by setting the filters based on user attributes.*
 
