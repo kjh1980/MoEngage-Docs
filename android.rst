@@ -1,19 +1,50 @@
 
-MoEngage Documentation for Android.
-==================================
+Android Integration guide
+=========================
 
-Adding Jar file to the Android project
---------------------------------------
+Installing the MoEngage library - Eclipse
+-----------------------------------------
 
-Add the given MoEngage-Android-SDK.jar file to the project, by copying
-the jar file to the libs folder. If there is no libs folder please
-create a libs folder. Make sure that you have the latest android support
-jar file (android-support-v4.jar) accessable to the project.
+Step 1 - Get the latest MoEngage library release
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Push Registration
------------------
+You must have received the latest MoEngage SDK from the team. If you have received the SDK, please proceed to the next steps.
 
-create a Google API project :
+Step 2 - Import the SDK into your project's workspace
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Add the given MoEngage-Android-SDK.jar file to the project, by copying the jar file to the libs folder. If there is no libs folder please
+create a libs folder.
+
+Make sure that you have the latest android support jar file (android-support-v4.jar) accessable to the project.
+
+Step 3 - Add permissions to your AndroidManifest.xml
+
+In order for the library to work, you need to ensure that you're requesting the following permissions in your AndroidManifest.xml:
+
+::
+
+    <!--
+    This permission is required to allow the application to send
+    user events and attributes to MoEngage.
+    -->
+    <uses-permission
+      android:name="android.permission.INTERNET" />
+    
+    <!--
+      This permission is optional but recommended so we can be smart
+      about when to send data.
+     -->
+    <uses-permission
+      android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+At this point, you're ready to use the MoEngage SDK inside Eclipse!
+
+Setting up Push Notifications through GCM
+----------------------------------------
+
+Step 1 - Create a Google API project
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Open the `Google Developers Console`_.
 2. If you havenÕt created an API project yet, click Create Project.
@@ -23,14 +54,18 @@ create a Google API project :
    670330094152.
 5. Copy down your project number. You will use it later on as the GCM
    sender ID.
+   
+.. _Google Developers Console: https://cloud.google.com/console
 
-Enabling the GCM Service
+Step 2 - Enabling the GCM Service
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. In the sidebar on the left, select APIs & auth.
 2. In the displayed list of APIs, turn the Google Cloud Messaging for
    Android toggle to ON.
 
-Obtaining an API Key
+Step 3 - Obtaining an API Key
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. In the sidebar on the left, select APIs & auth > Credentials.
 2. Under Public API access, click Create new key.
@@ -39,8 +74,8 @@ Obtaining an API Key
    Create.
 5. In the refreshed page, copy the API key and send it to us.
 
-Change the manifest file
-------------------------
+Handling Push Notifications
+---------------------------
 
 To enable push notifications, add the following lines to your manifest
 file by replacing PACKAGE\_NAME with your package name, you have to
@@ -66,17 +101,38 @@ replace the package name 3 times.
     <receiver android:name="com.moe.pushlibrary.PushGcmRegister" />
     <receiver android:name="com.moe.pushlibrary.SendReport" />
 
-To add Install Attribution (User Acquisition Source) tracking, add the
-following lines
+Gcm ids are refreshed after every update, to handle that please put the
+following code, note that the PACKAGE\_NAME has to be replaced with your
+app package name.
 
 ::
 
-    <receiver android:name="com.moe.pushlibrary.InstallReceiver">
-        <intent-filter>
-            <action android:name="com.android.vending.INSTALL_REFERRER"/>
-            </intent-filter>
+    <receiver android:name="com.moe.pushlibrary.PushUpdateReceiver">
+    <intent-filter>
+            <action android:name="android.intent.action.PACKAGE_REPLACED" />
+            <data android:path="PACKAGE_NAME"
+                android:scheme="package" />
+        </intent-filter>
     </receiver>
 
-Gcm ids are refreshed after every update, to handle that please put the
-following code, note that the PACKAGE\_NAME has to be replaced with your
-app pakage name.
+Initializing the SDK and Push Notifications
+-------------------------------------------
+
+Put the following code in the first activity onCreate() method
+
+::
+
+    MoEHelper mHelper = new MoEHelper(this);
+    mHelper.initialize("GCM Sender ID", "MoEngage APP ID");
+
+GCM Sender ID - the ID of the project created as part of Push Registration
+MoEngage APP ID - This is an application specific id, which MoEngage team must have shared with you.
+
+Put the following code after the above initialization code to register for push
+
+::
+
+    mHelper.Register(drawableResourceId);
+    drawableResourceId - for eg. R.drawable.icon
+
+
