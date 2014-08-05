@@ -107,7 +107,7 @@ For eg. to set unique id for the user
     
 uniqueId - unique id for the user specific to your system, so that there is a unique identifier mapping between your platform and MoEngage.
 
-You can use MoEHelperConstants class to set the default user attributes like mobile number, gender, user name, brithday. Birthday has to be in the format - "mm/dd/yyyy". The constants for these default attributes in MoEHelperConstants are mentioned below:
+You can use MoEngageConstants class to set the default user attributes like mobile number, gender, user name, brithday. Birthday has to be in the format - "mm/dd/yyyy". The constants for these default attributes in MoEHelperConstants are mentioned below:
 
 ::
 
