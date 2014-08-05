@@ -52,37 +52,6 @@ Tracking Notifications
 ------------------------------------
 Add "RootFrame.Navigated += MoEngage.Navigated;" to InitializePhoneApplication method in App.xaml.cs
 
-
-Send a push notification for testing
-------------------------------------
-
-Once you have set up your permissions and set up GCMReciever as a receiver of Google Cloud Messaging notifications in your AndroidManifest.xml file and
-added the initialization code mentioned above, you're ready to send a notification!
-
-Install and run your application on an Android device (not the emulator, it can't receive notifications).
-Make sure to run the app until the calls to the initialization code mentioned above has been run. For apps built
-according to our recommendations, these calls are in the onCreate method of your main application activity, so it is enough to simply open the app. Press the back button to close your app.
-
-Now log in to your MoEngage account and select `Create Campaign`_ from the left-hand navigation, and click on 'General Push Campaign'.
-
-.. _Create Campaign: http://app.moengage.com/newpushcampaign
-
-If this is the first time you are testing MoEngage SDK with your app, you can just set a test message, leave the screen selection part, set the scheduling to run 'as soon as possible' and create the campaign as shown below:
-
-.. image:: images/7.png
-
-.. image:: images/8.png
-
-.. image:: images/9.png
-
-Once the campaign is created, the message should show up on your device.
-
-.. image:: images/10.png
-   :scale: 50 %
-
-
-*Note: If MoEngage SDK has been integrated earlier with your app and has been released to your users, please don't create a campaign targeting all users. You can create a campaign targeting only your device by setting the filters based on user attributes.*
-
 Using MoEngage code 
 -------------------------
 Add "using MoEngageSDK;" to all code files where MoEngage SDK is used.
