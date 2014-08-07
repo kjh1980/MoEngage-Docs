@@ -18,43 +18,58 @@ Add the given MoEngageSDK.dll file to the project. Project -> Add Reference -> B
 Step 3 - Adding capabilities
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 open the WMAppManifest.xml in the properties, enable the following capabilities
-ID_CAP_NETWORKING
-ID_CAP_PUSH_NOTOFICATION
-ID_CAP_IDENTITY_DEVICE
+
+::
+
+    ID_CAP_NETWORKING
+    ID_CAP_PUSH_NOTOFICATION
+    ID_CAP_IDENTITY_DEVICE
 
 Tracking User Sessions
--------------------------------------------
+----------------------
 In your App.xaml.cs add the following code in the respective methods..
 
-ApplicationID - a unique id will be provided to you from MoEngage.
+ApplicationID - a unique id will be provided to you from MoEngage. You can also find it in the 'App Settings' tab of the 'Settings' page of your MoEngage account.
 
-private void Application_Launching(object sender, LaunchingEventArgs e)
-{               
-    MoEngage.OpenSession("ApplicationID", true);
-}
+::
 
-private void Application_Activated(object sender, ActivatedEventArgs e)
-{
-    MoEngage.OpenSession("ApplicationID", true);
-}
+    private void Application_Launching(object sender, LaunchingEventArgs e)
+    {               
+        MoEngage.OpenSession("ApplicationID", true);
+    }
+    
+    private void Application_Activated(object sender, ActivatedEventArgs e)
+    {
+        MoEngage.OpenSession("ApplicationID", true);
+    }
+    
+    private void Application_Deactivated(object sender, DeactivatedEventArgs e)
+    {
+        MoEngage.CloseSession();
+    }
+    
+    private void Application_Closing(object sender, ClosingEventArgs e)
+    {
+        MoEngage.CloseSession();
+    }
 
-private void Application_Deactivated(object sender, DeactivatedEventArgs e)
-{
-    MoEngage.CloseSession();
-}
-
-private void Application_Closing(object sender, ClosingEventArgs e)
-{
-    MoEngage.CloseSession();
-}
 
 Tracking Notifications
 ------------------------------------
-Add "RootFrame.Navigated += MoEngage.Navigated;" to InitializePhoneApplication method in App.xaml.cs
+Add the below to InitializePhoneApplication method in App.xaml.cs
+
+::
+
+    RootFrame.Navigated += MoEngage.Navigated;
 
 Using MoEngage code 
 -------------------------
-Add "using MoEngageSDK;" to all code files where MoEngage SDK is used.
+Add the below to all code files where MoEngage SDK is used.
+
+::
+
+    using MoEngageSDK;
+    
 Use MoEngage.<method> to call a method.
 
 Tracking your first event
@@ -65,13 +80,16 @@ Once you've added dll as reference, you can track an event using trackEvent with
 Every event has 2 attributes, action name and key, value pairs which represent additional information about the action. Add all the additional information which you think would be useful for segmentation while creating campaigns.
 For eg. the following code tracks a purchase event of a product. We are including attributes like amount, quantity, category which describe the event we are tracking.
 
+::
 
-MoEngage.trackEvent("Made Purchase", new {product="Moto E", amount=7000, currency = "Rs", category = "Mobiles"});
+    MoEngage.trackEvent("Made Purchase", new {product="Moto E", amount=7000, currency = "Rs", category = "Mobiles"});
 
-or 
-var attrs = new {product="Moto E", amount=7000, currency = "Rs", category = "Mobiles"};
-MoEngage.trackEvent("Made Purchase", attrs);
+or
 
+::
+
+    var attrs = new {product="Moto E", amount=7000, currency = "Rs", category = "Mobiles"};
+    MoEngage.trackEvent("Made Purchase", attrs);
 
 *Please make sure that you are tracking event attributes without changing their data types. For instance, in the above purchase event, amount and quantity are tracked in the numeric form. Our system detects the data type automatically unless you explicitly specify it as a string.*
 
