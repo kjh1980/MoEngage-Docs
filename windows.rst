@@ -103,6 +103,7 @@ Testing event tracking after integration
 To test event tracking, first you need to login to the MoEngage portal with the credentials provided for your app.
 
 After adding event tracking in the app as shown in the guide above, you can visit `For Developers`_ link through the MoEngage portal to check whether the events are being tracked, as you use.
+
 .. _For Developers: http://app.moengage.com/latestActivity
 
 .. image:: images/11.png
