@@ -405,6 +405,8 @@ Geo Fencing is an extension of push messaging, so please complete the steps requ
 
 Add the following line to the manifest..
 
+::
+
     <service android:name="com.moe.geofence.MOEGeoFenceIntentService"></service>
     
 To setup geofences inside the application, call setGeoFences(lat, lng, context) method. lat and lng are the location around which you wish to set the geofences.
