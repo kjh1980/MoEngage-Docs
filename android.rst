@@ -421,7 +421,7 @@ In the above example, MoEngage sets up the geofences around 17.1832,23.3292 loca
 Testing GeoFencing
 --------------------------------
 
-To test if the geofencing is working, create a GeoFence Campaign under the campaigns section in the dashboard. Add your current location as one of the geofence and save the campaign.Now, open the app and make sure the **setGeofences** code is run. You should get a push notification with the message that was part of the campaign.
+To test if the geofencing is working, create a GeoFence Campaign under the campaigns section in the dashboard. Add your current location as one of the geofence and save the campaign.Now, open the app and make sure the **setGeoFences** code is run. You should get a push notification with the message that was part of the campaign.
 
     
 
