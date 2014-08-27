@@ -399,7 +399,7 @@ This helps us to attribute your users with the source through which users found 
     
 GeoFencing 
 --------------------------------
-Acess fine locaiton permission is required for geofencing to work.
+Acess fine location permission is required for geofencing to work.
 
 Geo Fencing is an extension of push messaging, so please complete the steps required for push before going any further.
 
