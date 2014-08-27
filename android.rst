@@ -396,5 +396,28 @@ This helps us to attribute your users with the source through which users found 
             <action android:name="com.android.vending.INSTALL_REFERRER"/>
             </intent-filter>
     </receiver>
+    
+GeoFencing 
+--------------------------------
+Acess fine locaiton permission is required for geofencing to work.
 
+Geo Fencing is an extension of push messaging, so please complete the steps required for push before going any further.
+
+Add the following line to the manifest..
+
+    <service android:name="com.moe.geofence.MOEGeoFenceIntentService"></service>
+    
+To setup geofences inside the application, call setGeoFences(lat, lng, context) method. lat and lng are the location around which you wish to set the geofences.
+
+    MoEHelper mHelper = new MoEHelper(this);
+    mHelper.setGeoFences(17.1832, 23.3292, this);
+    
+In the above example, MoEngage sets up the geofences around 17.1832,23.3292 location co-ordinates. If you are not sure about the location, pass 0.0 value for both lat and lng. The app sets up the 90 nearest geofences.
+
+Testing GeoFencing
+--------------------------------
+
+To test if the geofencing is working, create a GeoFence Campaign under the campaigns section in the dashboard. Add your current location as one of the geofence and save the campaign.Now, open the app and make sure the setGeofences code is run. You should get a push notification with the message that was part of the campaign.
+
+    
 
