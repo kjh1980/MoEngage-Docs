@@ -412,6 +412,7 @@ Add the following line to the manifest..
 To setup geofences inside the application, call setGeoFences(lat, lng, context) method. lat and lng are the location around which you wish to set the geofences.
 
 ::
+
     MoEHelper mHelper = new MoEHelper(this);
     mHelper.setGeoFences(17.1832, 23.3292, this);
     
