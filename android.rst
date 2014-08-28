@@ -399,9 +399,14 @@ This helps us to attribute your users with the source through which users found 
     
 GeoFencing 
 --------------------------------
-Acess fine location permission is required for geofencing to work.
 
-Geo Fencing is an extension of push messaging, so please complete the steps required for push before going any further.
+To use geofencing, your app must request ACCESS_FINE_LOCATION. To request this permission, add the following element as a child element of the <manifest> element:
+
+::
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+Geo-fencing is an extension of push messaging, so please complete the steps required for push notification before going any further.
 
 Add the following line to the manifest..
 
@@ -409,19 +414,19 @@ Add the following line to the manifest..
 
     <service android:name="com.moe.geofence.MOEGeoFenceIntentService"></service>
     
-To setup geofences inside the application, call setGeoFences(lat, lng, context) method. lat and lng are the location around which you wish to set the geofences.
+To setup geofences inside the application, call setGeoFences(lat, lng, context) method. lat and lng are the location around which you wish to set the geofences. Since you can only create a maximum of 90 geofences per app user, you can use the lat/lng to create the geofences required, if you want to create more than 90 geofences across all users.
 
 ::
 
     MoEHelper mHelper = new MoEHelper(this);
     mHelper.setGeoFences(17.1832, 23.3292, this);
     
-In the above example, MoEngage sets up the geofences around 17.1832,23.3292 location co-ordinates. If you are not sure about the location, pass 0.0 value for both lat and lng. The app sets up the 90 nearest geofences.
+In the above example, MoEngage sets up the geofences around 17.1832,23.3292 location co-ordinates. If you are not sure about the location (or) you just want to create geofences less than 90 across your users, pass 0.0 value for both lat and lng. The app sets up the 90 nearest geofences.
 
-Testing GeoFencing
+Testing Geo-fencing
 --------------------------------
 
-To test if the geofencing is working, create a GeoFence Campaign under the campaigns section in the dashboard. Add your current location as one of the geofence and save the campaign.Now, open the app and make sure the **setGeoFences** code is run. You should get a push notification with the message that was part of the campaign.
+To test whether Geo-fencing is working, create a Geo-fence Campaign under the campaigns section in the dashboard. Add your current location as one of the geofence and save the campaign. Now, open the app and make sure the **setGeoFences** code is run. You should get a push notification with the message that was part of the campaign.
 
     
 
