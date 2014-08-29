@@ -180,3 +180,20 @@ have been using your app when they use after updating to the app with MoEngage S
 You can do this by writing the user attributes setting code (mentioned earlier) in the first screen existing users see after updating the app.
 
 This helps your product/marketing team to target based on the attributes of all users who use the updated app.
+
+Enabling and Disabling Push notifications
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To enable the push notifications use the following line
+
+::
+
+    MoEngage.PushNotificationsEnabled = true;
+
+To disable the push notificaitons use the following line
+
+::
+
+    MoEngage.PushNotificationsEnabled = false;
+
+
