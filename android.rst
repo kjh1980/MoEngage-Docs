@@ -193,6 +193,8 @@ Put the following code after the above initialization code to register for push
 Send a push notification for testing
 ------------------------------------
 
+Make sure you track at least one event and have implemented "Tracking User Activity" for at least one activity in the app before you try push notifications.
+
 Once you have set up your permissions and set up GCMReciever as a receiver of Google Cloud Messaging notifications in your AndroidManifest.xml file and
 added the initialization code mentioned above, you're ready to send a notification!
 
