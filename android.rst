@@ -222,11 +222,39 @@ Once the campaign is created, the message should show up on your device.
 
 *Note: If MoEngage SDK has been integrated earlier with your app and has been released to your users, please don't create a campaign targeting all users. You can create a campaign targeting only your device by setting the filters based on user attributes.*
 
+Tracking user activity
+-------------------------
+
+Put the following code in every activity of the app. This step is crucial for all the events to be tracked at the right time.
+
+::
+
+    // in onStart()
+    MoEHelper.getInstance(this).onStart(this);
+    
+    // in onStop()
+    MoEHelper.getInstance(this).onStop(this);  
+
+as shown in the codes below
+
+::
+
+    protected void onStart() {
+        super.onStart();
+        MoEHelper.getInstance(this).onStart(this);
+    }
+    protected void onStop() {
+        super.onStop();
+        MoEHelper.getInstance(this).onStop(this);
+    }
+
+
 
 Tracking your first event
 -------------------------
 
 Once you've initialized the SDK, you can track an event using trackEvent with the event name and it's characteristics (attributes).
+Make sure you have implemented Tracking User Activity before you can track an event.
 
 Every event has 2 attributes, action name and key, value pairs which represent additional information about the action. Add all the additional information which you think would be useful for segmentation while creating campaigns.
 For eg. the following code tracks a purchase event of a product. We are including attributes like amount, quantity, category which describe the event we are tracking.
@@ -356,34 +384,6 @@ have been using your app when they use after updating to the app with MoEngage S
 You can do this by writing the user attributes setting code (mentioned earlier) in the first screen existing users see after updating the app.
 
 This helps your product/marketing team to target based on the attributes of all users who use the updated app.
-
-
-Tracking user activity
--------------------------
-
-Put the following code in every activity of the app
-
-::
-
-    // in onStart()
-    MoEHelper.getInstance(this).onStart(this);
-    
-    // in onStop()
-    MoEHelper.getInstance(this).onStop(this);  
-
-as shown in the codes below
-
-::
-
-    protected void onStart() {
-        super.onStart();
-        MoEHelper.getInstance(this).onStart(this);
-    }
-    protected void onStop() {
-        super.onStop();
-        MoEHelper.getInstance(this).onStop(this);
-    }
-
 
 
 User Acquisition source tracking
