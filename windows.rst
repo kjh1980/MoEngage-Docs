@@ -95,6 +95,7 @@ or
 If you don't have any attributes, just pass None as second argument. for eg.
 
 ::
+
     MoEngage.trackEvent("Made Purchase", None);
     
 
