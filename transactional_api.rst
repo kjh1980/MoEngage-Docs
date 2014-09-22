@@ -43,6 +43,7 @@ API call targeting a user based on the attributes
 
 Attributes can be either a uniqueId that your app assigns to the user or his email address.
 
+::
 
     userId - unique id of the user, use this parameter if you want to target user based on the unique Id along with target as "user"
     userEmail - email of the user, use this parameter if you want to target user based on the email address along with target as "user"
@@ -68,6 +69,8 @@ API call targeting a user based on the past activity or action
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You will need to target the user based on the action and also based on the available attributes for that particular action.
+
+::
 
     eventName - event or action that the user has done in the past
     attrName - attribute name associated with the event
