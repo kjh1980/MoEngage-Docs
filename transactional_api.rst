@@ -45,7 +45,6 @@ Attributes can be either a uniqueId that your app assigns to the user or his ema
 
 
     userId - unique id of the user, use this parameter if you want to target user based on the unique Id along with target as "user"
-    
     userEmail - email of the user, use this parameter if you want to target user based on the email address along with target as "user"
 
 A sample JSON object for sending it as part of request body would looke like
