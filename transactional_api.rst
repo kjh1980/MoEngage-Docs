@@ -3,7 +3,6 @@ Transactional API Integration guide
 ===============================
 
 Transactional API can be used to send push to your users individually, like targeting based on the activity they did in the past or targeting based on the unique parameters the user has like a unique user Id or email or mobile number. If you would like to target multiple people, you can use the campaigns feature provided to you in the dashboard.
------------------------------------------
 
 How to make the API call.
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -46,6 +45,7 @@ Attributes can be either a uniqueId that your app assigns to the user or his ema
 
 
     userId - unique id of the user, use this parameter if you want to target user based on the unique Id along with target as "user"
+    
     userEmail - email of the user, use this parameter if you want to target user based on the email address along with target as "user"
 
 A sample JSON object for sending it as part of request body would looke like
