@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Transactional API Integration guide &mdash; MoEngage Docs 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MoEngage Docs 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">MoEngage Docs 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="transactional-api-integration-guide">
+<h1>Transactional API Integration guide<a class="headerlink" href="#transactional-api-integration-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="transactional-api-can-be-used-to-send-push-to-your-users-individually-like-targeting-based-on-the-activity-they-did-in-the-past-or-targeting-based-on-the-unique-parameters-the-user-has-like-a-unique-user-id-or-email-or-mobile-number-if-you-would-like-to-target-multiple-people-you-can-use-the-campaigns-feature-provided-to-you-in-the-dashboard">
+<h2>Transactional API can be used to send push to your users individually, like targeting based on the activity they did in the past or targeting based on the unique parameters the user has like a unique user Id or email or mobile number. If you would like to target multiple people, you can use the campaigns feature provided to you in the dashboard.<a class="headerlink" href="#transactional-api-can-be-used-to-send-push-to-your-users-individually-like-targeting-based-on-the-activity-they-did-in-the-past-or-targeting-based-on-the-unique-parameters-the-user-has-like-a-unique-user-id-or-email-or-mobile-number-if-you-would-like-to-target-multiple-people-you-can-use-the-campaigns-feature-provided-to-you-in-the-dashboard" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-to-make-the-api-call">
+<h3>How to make the API call.<a class="headerlink" href="#how-to-make-the-api-call" title="Permalink to this headline">¶</a></h3>
+<p>API call is a POST method, and the end url is mentioned below.</p>
+<div class="highlight-python"><div class="highlight"><pre>http://runcampaigns.moengage.com/v1/notifyUser
+</pre></div>
+</div>
+<p>Headers for the call</p>
+<div class="highlight-python"><div class="highlight"><pre>&#39;Content-Type&#39;:&#39;application/json&#39;
+</pre></div>
+</div>
+<p>Parameters necessary for the API call should be passed as JSON object string as part of request body.</p>
+<p>Required parameters</p>
+<div class="highlight-python"><div class="highlight"><pre>appId (*) - Unique Id that MoEngage has shared with you.
+target (*) - value can be either &quot;action&quot; or &quot;user&quot;.
+screenName (*) - the screen you want to take the user to after he clicks on push notification. This is a JSON object with the keys as the platforms you would like to target, along with values as the full activity name or xaml file name.
+ttl (*) - time to live value in seconds
+title (*) - title of the push
+message (*) - message for the push
+</pre></div>
+</div>
+<p>Optioinal parameters</p>
+<div class="highlight-python"><div class="highlight"><pre>data - JSON object that is used to extra key value pairs for the screen that opens when user clicks on the push notification.
+</pre></div>
+</div>
+</div>
+<div class="section" id="api-call-targeting-a-user-based-on-the-attributes">
+<h3>API call targeting a user based on the attributes<a class="headerlink" href="#api-call-targeting-a-user-based-on-the-attributes" title="Permalink to this headline">¶</a></h3>
+<p>Attributes can be either a uniqueId that your app assigns to the user or his email address.</p>
+<blockquote>
+<div>userId - unique id of the user, use this parameter if you want to target user based on the unique Id along with target as &#8220;user&#8221;
+userEmail - email of the user, use this parameter if you want to target user based on the email address along with target as &#8220;user&#8221;</div></blockquote>
+<p>A sample JSON object for sending it as part of request body would looke like</p>
+<div class="highlight-python"><div class="highlight"><pre>{
+    &quot;appId&quot;: &quot;your app id&quot;,
+    &quot;screenName&quot;: {&quot;android&quot;:&quot;com.example.moengagetest.MainActivity&quot;,&quot;windows&quot;:&quot;Page.xaml&quot;}
+    &quot;ttl&quot;: 86400,
+    &quot;message&quot;: &quot;Hello&quot;,
+    &quot;title&quot;: &quot;Hi&quot;,
+    &quot;target&quot;: &quot;user&quot;,
+    &quot;userId&quot;: &quot;1234&quot;
+}
+</pre></div>
+</div>
+<p>From the above parameters, we are targeting a user with unique Id as 1234. Screen names should be available for each platform, if you do not mention the screen name for a particular platform, we will not push to the user.</p>
+</div>
+<div class="section" id="api-call-targeting-a-user-based-on-the-past-activity-or-action">
+<h3>API call targeting a user based on the past activity or action<a class="headerlink" href="#api-call-targeting-a-user-based-on-the-past-activity-or-action" title="Permalink to this headline">¶</a></h3>
+<p>You will need to target the user based on the action and also based on the available attributes for that particular action.</p>
+<blockquote>
+<div>eventName - event or action that the user has done in the past
+attrName - attribute name associated with the event
+attrValue - attribute value for the attribute name</div></blockquote>
+<p>A sample JSON object for sending it as part of request body would looke like</p>
+<div class="highlight-python"><div class="highlight"><pre>{
+    &quot;appId&quot;: &quot;QVF7UXCJO9M74NCFMVUIVFGQ&quot;,
+    &quot;screenName&quot;: {&quot;android&quot;:&quot;com.example.moengagetest.MainActivity&quot;,&quot;windows&quot;:&quot;Page.xaml&quot;}
+    &quot;ttl&quot;: 86400,
+    &quot;message&quot;: &quot;Hello&quot;,
+    &quot;title&quot;: &quot;Hi&quot;,
+    &quot;target&quot;: &quot;action&quot;,
+    &quot;eventName&quot;: &quot;purchased&quot;,
+    &quot;attrName&quot;: &quot;purchase Id&quot;,
+    &quot;attrValue&quot;: &quot;7854&quot;
+}
+</pre></div>
+</div>
+<p>From the above parameters, we are targeting a user who has made a purchase with purchase Id as 7854. Screen names should be available for each platform, if you do not mention the screen name for a particular platform, we will not push to the user.</p>
+</div>
+<div class="section" id="response-for-a-successful-api-call">
+<h3>Response for a successful API call<a class="headerlink" href="#response-for-a-successful-api-call" title="Permalink to this headline">¶</a></h3>
+<p>Response will be a json object, on the sucessfull call you will receive response as {&#8220;result&#8221;:&#8221;Push Sent&#8221;}</p>
+</div>
+<div class="section" id="response-for-invalid-api-call">
+<h3>Response for Invalid API call<a class="headerlink" href="#response-for-invalid-api-call" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>&quot;data should be provided in JSON format&quot; - request body is not in JSON format
+&quot;appId not found&quot; - appId parameter not found in reqeust body
+&quot;target not found&quot; - target parameter not found in request body
+&quot;target has to be either action or user&quot; - target value is neither &quot;user&quot; or &quot;action&quot;
+&quot;user atrributes not found&quot; - none of the expected user attributes found like userId, userEmail
+&quot;screenName not found&quot; - screenName parameter not found in request body
+&quot;ttl not found&quot; - ttl parameter not found in request body
+&quot;title not found&quot; - title parameter not found in request body
+&quot;message not found&quot; - message parameter not found in request body
+&quot;no user found&quot; - couldn&#39;t find any users with the mentioned parameters
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Transactional API Integration guide</a><ul>
+<li><a class="reference internal" href="#transactional-api-can-be-used-to-send-push-to-your-users-individually-like-targeting-based-on-the-activity-they-did-in-the-past-or-targeting-based-on-the-unique-parameters-the-user-has-like-a-unique-user-id-or-email-or-mobile-number-if-you-would-like-to-target-multiple-people-you-can-use-the-campaigns-feature-provided-to-you-in-the-dashboard">Transactional API can be used to send push to your users individually, like targeting based on the activity they did in the past or targeting based on the unique parameters the user has like a unique user Id or email or mobile number. If you would like to target multiple people, you can use the campaigns feature provided to you in the dashboard.</a><ul>
+<li><a class="reference internal" href="#how-to-make-the-api-call">How to make the API call.</a></li>
+<li><a class="reference internal" href="#api-call-targeting-a-user-based-on-the-attributes">API call targeting a user based on the attributes</a></li>
+<li><a class="reference internal" href="#api-call-targeting-a-user-based-on-the-past-activity-or-action">API call targeting a user based on the past activity or action</a></li>
+<li><a class="reference internal" href="#response-for-a-successful-api-call">Response for a successful API call</a></li>
+<li><a class="reference internal" href="#response-for-invalid-api-call">Response for Invalid API call</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/transactional_api.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html">MoEngage Docs 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, MoEngage Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

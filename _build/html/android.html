@@ -1,0 +1,461 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Android Integration guide &mdash; MoEngage Docs 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MoEngage Docs 1 documentation" href="index.html" />
+    <link rel="next" title="Windows Phone Integration guide" href="windows.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="windows.html" title="Windows Phone Integration guide"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="Introduction"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">MoEngage Docs 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="android-integration-guide">
+<h1>Android Integration guide<a class="headerlink" href="#android-integration-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installing-the-moengage-library-eclipse">
+<h2>Installing the MoEngage library - Eclipse<a class="headerlink" href="#installing-the-moengage-library-eclipse" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-1-get-the-latest-moengage-library-release">
+<h3>Step 1 - Get the latest MoEngage library release<a class="headerlink" href="#step-1-get-the-latest-moengage-library-release" title="Permalink to this headline">¶</a></h3>
+<p>You must have received the latest MoEngage SDK from the team. If you have received the SDK, please proceed to the next steps.</p>
+</div>
+<div class="section" id="step-2-import-the-sdk-into-your-project-s-workspace">
+<h3>Step 2 - Import the SDK into your project&#8217;s workspace<a class="headerlink" href="#step-2-import-the-sdk-into-your-project-s-workspace" title="Permalink to this headline">¶</a></h3>
+<p>Add the given MoEngage-Android-SDK.jar file to the project, by copying the jar file to the libs folder. If there is no libs folder please
+create a libs folder.</p>
+<p><em>Make sure that you have the latest android support jar file (android-support-v4.jar) accessable to the project.</em></p>
+</div>
+<div class="section" id="step-3-add-permissions-to-your-androidmanifest-xml">
+<h3>Step 3 - Add permissions to your AndroidManifest.xml<a class="headerlink" href="#step-3-add-permissions-to-your-androidmanifest-xml" title="Permalink to this headline">¶</a></h3>
+<p>In order for the library to work, you need to ensure that you&#8217;re requesting the following permissions in your AndroidManifest.xml:</p>
+<div class="highlight-python"><div class="highlight"><pre>&lt;!--
+This permission is required to allow the application to send
+user events and attributes to MoEngage.
+--&gt;
+&lt;uses-permission
+  android:name=&quot;android.permission.INTERNET&quot; /&gt;
+
+&lt;!--
+  This permission is optional but recommended so we can be smart
+  about when to send data.
+ --&gt;
+&lt;uses-permission
+  android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;
+</pre></div>
+</div>
+<p>At this point, you&#8217;re ready to use the MoEngage SDK inside Eclipse!</p>
+</div>
+</div>
+<div class="section" id="setting-up-push-notifications-through-gcm">
+<h2>Setting up Push Notifications through GCM<a class="headerlink" href="#setting-up-push-notifications-through-gcm" title="Permalink to this headline">¶</a></h2>
+<p>This covers a quick-start guide for setting up push for your Android app that covers setting up your Google API project,
+locating the your project number, uploading your Google API Project key to MoEngage portal.</p>
+<div class="section" id="step-1-enabling-google-cloud-messaging-gcm-in-your-google-api-console">
+<h3>Step 1 - Enabling Google Cloud Messaging (GCM) in your Google API Console<a class="headerlink" href="#step-1-enabling-google-cloud-messaging-gcm-in-your-google-api-console" title="Permalink to this headline">¶</a></h3>
+<p>To enable Google Cloud Messaging (GCM) for Android, there are a few preliminary steps that must be taken.
+You will first need to turn on the Google Cloud Messaging Services from <a class="reference external" href="https://cloud.google.com/console">Google&#8217;s API Console page</a>.
+If you do you not have a Google API project yet, the following pop up will appear prompting you to create a project.</p>
+<img alt="_images/1.png" src="_images/1.png" />
+<p>Click on the &#8220;Create Project...&#8221; to create a new project. Once you have created a new project (or if you already have an existing project),
+you will be taken to the console&#8217;s dashboard.</p>
+<p>Once the project has been created, a page appears that displays your project ID and project number. The project number will be your
+twelve digit GCM Sender ID, which you will need to use in your code later to register your application for push notifications.</p>
+<p>From the Google API Console page, select &#8220;Services&#8221; from the left-hand navigation. Find &#8220;Google Cloud Messaging for Android&#8221; in the list of services,
+and turn it on by clicking the switch in the &#8220;Status&#8221; column.</p>
+<img alt="_images/2.png" src="_images/2.png" />
+<p>Create an Google API key. From the Google API Console page, select &#8220;Public API Access&#8221; from the left navigation and click &#8220;Create new Server key...&#8221;. You should see the following pop up.</p>
+<img alt="_images/3.png" src="_images/3.png" />
+<p>Click the create button. The next page will contain a &#8220;Simple API Access&#8221; header, and below the header a &#8220;Key for server apps&#8221; box.
+Your Google API key will appear in this box, after the heading &#8220;API Key:&#8221;.</p>
+<img alt="_images/4.png" src="_images/4.png" />
+</div>
+<div class="section" id="step-2-uploading-your-gcm-api-key-through-moengage-portal">
+<h3>Step 2 - Uploading your GCM API Key through MoEngage portal<a class="headerlink" href="#step-2-uploading-your-gcm-api-key-through-moengage-portal" title="Permalink to this headline">¶</a></h3>
+<p>In order for MoEngage to send Google Cloud Messaging notifications on your behalf, you will need to enter the
+Google API key generated from the last step through MoEngage portal. To upload it, log in to your MoEngage account provided by the team
+and click the Settings button (with the gear icon) on the top-right corner of the screen as shown below:</p>
+<img alt="_images/5.png" src="_images/5.png" />
+<p>In the Settings page, click on the &#8220;App settings&#8221; tab. Then paste in your Google API key into the text field that appears for GCM key.
+Click the &#8220;Save&#8221; button underneath the text fields to confirm.</p>
+<img alt="_images/6.png" src="_images/6.png" />
+</div>
+</div>
+<div class="section" id="handling-push-notifications">
+<h2>Handling Push Notifications<a class="headerlink" href="#handling-push-notifications" title="Permalink to this headline">¶</a></h2>
+<p>To enable push notifications, add the following lines to your manifest
+file by replacing PACKAGE_NAME with your package name, you have to
+replace the package name 3 times.</p>
+<div class="highlight-python"><div class="highlight"><pre>&lt;permission android:name=&quot;PACKAGE_NAME.permission.C2D_MESSAGE&quot; android:protectionLevel=&quot;signature&quot; /&gt;
+&lt;uses-permission android:name=&quot;PACKAGE_NAME.permission.C2D_MESSAGE&quot; /&gt;
+&lt;uses-permission android:name=&quot;com.google.android.c2dm.permission.RECEIVE&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.GET_ACCOUNTS&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.WAKE_LOCK&quot;/&gt;
+
+&lt;receiver android:name=&quot;com.moe.pushlibrary.PushGcmBroadcastReceiver&quot;
+        android:permission=&quot;com.google.android.c2dm.permission.SEND&quot; &gt;
+        &lt;intent-filter&gt;
+            &lt;action android:name=&quot;com.google.android.c2dm.intent.RECEIVE&quot; /&gt;
+            &lt;action android:name=&quot;com.google.android.c2dm.intent.REGISTRATION&quot; /&gt;
+            &lt;category android:name=&quot;PACKAGE_NAME&quot; /&gt;
+        &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+&lt;service android:name=&quot;com.moe.pushlibrary.PushGCMIntentService&quot; /&gt;
+&lt;receiver android:name=&quot;com.moe.pushlibrary.PushGcmRegister&quot; /&gt;
+&lt;receiver android:name=&quot;com.moe.pushlibrary.SendReport&quot; /&gt;
+</pre></div>
+</div>
+<p>Gcm ids are refreshed after every update, to handle that please put the
+following code, note that the PACKAGE_NAME has to be replaced with your
+app package name.</p>
+<div class="highlight-python"><div class="highlight"><pre>&lt;receiver android:name=&quot;com.moe.pushlibrary.PushUpdateReceiver&quot;&gt;
+&lt;intent-filter&gt;
+        &lt;action android:name=&quot;android.intent.action.PACKAGE_REPLACED&quot; /&gt;
+        &lt;data android:path=&quot;PACKAGE_NAME&quot;
+            android:scheme=&quot;package&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+</pre></div>
+</div>
+<div class="section" id="requirements-for-rich-landing-pages-through-push-notifications-recommended">
+<h3>Requirements for Rich Landing pages through Push notifications (recommended)<a class="headerlink" href="#requirements-for-rich-landing-pages-through-push-notifications-recommended" title="Permalink to this headline">¶</a></h3>
+<p>You can take the user to a mobile-optimized landing page when clicked on the notification. You can have call-to-action button in the page, which takes to the specific screen in App when clicked. It is recommended to add this capability, though your team might not use it immediately.</p>
+<p>Put the following activity as part of manifest for this to work:</p>
+<div class="highlight-python"><div class="highlight"><pre>&lt;activity
+    android:name=&quot;com.moe.pushlibrary.activities.MoEActivity&quot;
+    android:parentActivityName=&quot;yourparentactivityname&quot;
+&gt;
+    &lt;meta-data
+        android:name=&quot;android.support.PARENT_ACTIVITY&quot;
+        android:value=&quot;yourparentactivityname&quot;
+    /&gt;
+&lt;/activity&gt;
+</pre></div>
+</div>
+<p>Parent activity name is needed if you want to redirect the user to a particular screen when users click on the up button.
+If you don&#8217;t want to add the parent activity just include the following lines.</p>
+<div class="highlight-python"><div class="highlight"><pre>&lt;activity
+    android:name=&quot;com.moe.pushlibrary.activities.MoEActivity&quot;
+&gt;
+&lt;/activity&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="initializing-the-sdk-and-push-notifications">
+<h2>Initializing the SDK and Push Notifications<a class="headerlink" href="#initializing-the-sdk-and-push-notifications" title="Permalink to this headline">¶</a></h2>
+<p>Put the following code in the first activity onCreate() method</p>
+<div class="highlight-python"><div class="highlight"><pre>MoEHelper mHelper = new MoEHelper(this);
+mHelper.initialize(&quot;GCM Sender ID&quot;, &quot;MoEngage APP ID&quot;);
+</pre></div>
+</div>
+<p>GCM Sender ID - the twelve digit sender ID of your Google API project.
+MoEngage APP ID - This is an application specific id, which MoEngage team must have shared with you. You can also find it in the &#8216;App Settings&#8217; tab of the &#8216;Settings&#8217; page of your MoEngage account.</p>
+<p>Put the following code after the above initialization code to register for push</p>
+<div class="highlight-python"><div class="highlight"><pre>mHelper.Register(drawableResourceId);
+drawableResourceId - for eg. R.drawable.icon
+</pre></div>
+</div>
+</div>
+<div class="section" id="send-a-push-notification-for-testing">
+<h2>Send a push notification for testing<a class="headerlink" href="#send-a-push-notification-for-testing" title="Permalink to this headline">¶</a></h2>
+<p>Make sure you track at least one event and have implemented &#8220;Tracking User Activity&#8221; for at least one activity in the app before you try push notifications.</p>
+<p>Once you have set up your permissions and set up GCMReciever as a receiver of Google Cloud Messaging notifications in your AndroidManifest.xml file and
+added the initialization code mentioned above, you&#8217;re ready to send a notification!</p>
+<p>Install and run your application on an Android device (not the emulator, it can&#8217;t receive notifications).
+Make sure to run the app until the calls to the initialization code mentioned above has been run. For apps built
+according to our recommendations, these calls are in the onCreate method of your main application activity, so it is enough to simply open the app. Press the back button to close your app.</p>
+<p>Now log in to your MoEngage account and select <a class="reference external" href="http://app.moengage.com/newpushcampaign">Create Campaign</a> from the left-hand navigation, and click on &#8216;General Push Campaign&#8217;.</p>
+<p>If this is the first time you are testing MoEngage SDK with your app, you can just set a test message, leave the screen selection part, set the scheduling to run &#8216;as soon as possible&#8217; and create the campaign as shown below:</p>
+<img alt="_images/7.png" src="_images/7.png" />
+<img alt="_images/8.png" src="_images/8.png" />
+<img alt="_images/9.png" src="_images/9.png" />
+<p>Once the campaign is created, the message should show up on your device.</p>
+<a class="reference internal image-reference" href="_images/10.png"><img alt="_images/10.png" src="_images/10.png" /></a>
+<p><em>Note: If MoEngage SDK has been integrated earlier with your app and has been released to your users, please don&#8217;t create a campaign targeting all users. You can create a campaign targeting only your device by setting the filters based on user attributes.</em></p>
+</div>
+<div class="section" id="tracking-user-activity">
+<h2>Tracking user activity<a class="headerlink" href="#tracking-user-activity" title="Permalink to this headline">¶</a></h2>
+<p>Put the following code in every activity of the app. This step is crucial for all the events to be tracked at the right time.</p>
+<div class="highlight-python"><div class="highlight"><pre>// in onStart()
+MoEHelper.getInstance(this).onStart(this);
+
+// in onStop()
+MoEHelper.getInstance(this).onStop(this);
+</pre></div>
+</div>
+<p>as shown in the codes below</p>
+<div class="highlight-python"><div class="highlight"><pre>protected void onStart() {
+    super.onStart();
+    MoEHelper.getInstance(this).onStart(this);
+}
+protected void onStop() {
+    super.onStop();
+    MoEHelper.getInstance(this).onStop(this);
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="tracking-your-first-event">
+<h2>Tracking your first event<a class="headerlink" href="#tracking-your-first-event" title="Permalink to this headline">¶</a></h2>
+<p>Once you&#8217;ve initialized the SDK, you can track an event using trackEvent with the event name and it&#8217;s characteristics (attributes).
+Make sure you have implemented Tracking User Activity before you can track an event.</p>
+<p>Every event has 2 attributes, action name and key, value pairs which represent additional information about the action. Add all the additional information which you think would be useful for segmentation while creating campaigns.
+For eg. the following code tracks a purchase event of a product. We are including attributes like amount, quantity, category which describe the event we are tracking.</p>
+<div class="highlight-python"><div class="highlight"><pre>JSONObject newJson = new JSONObject();
+    try {
+      newJson.put(&quot;product&quot;, &quot;Moto E&quot;);
+      newJson.put(&quot;amount&quot;, 7000);
+      newJson.put(&quot;currency&quot;, &quot;Rs.&quot;);
+      newJson.put(&quot;category&quot;, &quot;Mobiles&quot;);
+      newJson.put(&quot;quantity&quot;, 2);
+} catch (JSONException e) {
+            // json exception
+    }
+MoEHelper.getInstance(mCurrentContext).trackEvent(&quot;Made Purchase&quot;, newJson);
+</pre></div>
+</div>
+<p>mCurrentContext - context instance, please change the name accordingly</p>
+<p><em>Please make sure that you are tracking event attributes without changing their data types. For instance, in the above purchase event, amount and quantity are tracked in the numeric form. Our system detects the data type automatically unless you explicitly specify it as a string.</em></p>
+<p>To pass location as one of the parameters for the event use the following code:</p>
+<div class="highlight-python"><div class="highlight"><pre>MoEHelperUtils.setLocation(newJson, &quot;attribute name&quot;, lat, lng);
+
+// 1st argument - json object which contains all the parameters for the event
+// 2nd argument - attribute name that you want to assign to the location
+// 3rd, 4th - latitude and longitude of a location.
+// for instance
+
+JSONObject newJson = new JSONObject();
+    try {
+      newJson.put(&quot;city&quot;, &quot;New York&quot;);
+      MoEHelperUtils.setLocation(newJson, &quot;city search&quot;, 40.77, 73.98);
+} catch (JSONException e) {
+            // json exception
+    }
+
+MoEHelper.getInstance(mCurrentContext).trackEvent(&quot;search&quot;, newJson);
+</pre></div>
+</div>
+<p><em>You should track all the events relevant to your business, so that your product managers and marketers can segment your app users and create targeted campaigns.</em></p>
+<div class="section" id="testing-event-tracking-after-integration">
+<h3>Testing event tracking after integration<a class="headerlink" href="#testing-event-tracking-after-integration" title="Permalink to this headline">¶</a></h3>
+<p>To test event tracking, first you need to login to the MoEngage portal with the credentials provided for your app.</p>
+<p>After adding event tracking in the app as shown in the guide above, you can visit <a href="#id1"><span class="problematic" id="id2">`For Developers`_</span></a> link through the MoEngage portal to check whether the events are being tracked, as you use.
+.. _For Developers: <a class="reference external" href="http://app.moengage.com/latestActivity">http://app.moengage.com/latestActivity</a></p>
+<img alt="_images/11.png" src="_images/11.png" />
+<p>As users use the application, events data is stored locally and sent in regular intervals of 30 seconds to avoid any performance impact. So, you might need to wait for sometime to see the events in the portal.</p>
+</div>
+</div>
+<div class="section" id="setting-user-attributes">
+<h2>Setting user attributes<a class="headerlink" href="#setting-user-attributes" title="Permalink to this headline">¶</a></h2>
+<p>Use the following lines to set User attributes like Name, Email, Mobile, Gender, etc.</p>
+<p>For eg. to set unique id for the user</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">MoEHelper</span><span class="o">.</span><span class="n">getInstance</span><span class="p">(</span><span class="n">mCurrentContext</span><span class="p">)</span><span class="o">.</span><span class="n">setUserAttribute</span><span class="p">(</span><span class="n">MoEHelperConstants</span><span class="o">.</span><span class="n">USER_ATTRIBUTE_UNIQUE_ID</span><span class="p">,</span> <span class="n">uniqueId</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>uniqueId - unique id for the user specific to your system, so that there is a unique identifier mapping between your platform and MoEngage.</p>
+<p>You can use MoEHelperConstants class to set the default user attributes like mobile number, gender, user name, brithday. Birthday has to be in the format - &#8220;mm/dd/yyyy&#8221;. The constants for these default attributes in MoEHelperConstants are mentioned below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">USER_ATTRIBUTE_UNIQUE_ID</span>
+<span class="n">USER_ATTRIBUTE_USER_EMAIL</span>
+<span class="n">USER_ATTRIBUTE_USER_MOBILE</span>
+<span class="n">USER_ATTRIBUTE_USER_NAME</span>   <span class="c"># incase you have full name</span>
+<span class="n">USER_ATTRIBUTE_USER_GENDER</span>
+<span class="n">USER_ATTRIBUTE_USER_FIRST_NAME</span> <span class="c"># incase you have first and last name separately</span>
+<span class="n">USER_ATTRIBUTE_USER_LAST_NAME</span>
+<span class="n">USER_ATTRIBUTE_USER_BDAY</span>
+<span class="n">GENDER_MALE</span> <span class="o">=</span> <span class="s">&quot;male&quot;</span><span class="p">;</span>
+<span class="n">GENDER_FEMALE</span> <span class="o">=</span> <span class="s">&quot;female&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>to set user email</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">MoEHelper</span><span class="o">.</span><span class="n">getInstance</span><span class="p">(</span><span class="n">mCurrentContext</span><span class="p">)</span><span class="o">.</span><span class="n">setUserAttribute</span><span class="p">(</span><span class="n">MoEHelperConstants</span><span class="o">.</span><span class="n">USER_ATTRIBUTE_USER_EMAIL</span><span class="p">,</span> <span class="n">email</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>email - email of the user</p>
+<p>To set user location, use the following line</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">MoEHelper</span><span class="o">.</span><span class="n">getInstance</span><span class="p">(</span><span class="n">mCurrentContext</span><span class="p">)</span><span class="o">.</span><span class="n">setUserLocation</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>lat - latitude of the location
+lng - longitude of the location</p>
+<div class="section" id="setting-custom-user-attributes">
+<h3>Setting custom user attributes<a class="headerlink" href="#setting-custom-user-attributes" title="Permalink to this headline">¶</a></h3>
+<p>The above examples demonstrate how to set predefined attributes and their values. To set custom attributes use the following syntax.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">MoEHelper</span><span class="o">.</span><span class="n">getInstance</span><span class="p">(</span><span class="n">mCurrentContext</span><span class="p">)</span><span class="o">.</span><span class="n">setUserAttribute</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>key - the name you want to give to the attribute
+value - the value you would like to assign to it</p>
+</div>
+<div class="section" id="setting-user-attributes-for-existing-registered-users">
+<h3>Setting user attributes for existing registered users<a class="headerlink" href="#setting-user-attributes-for-existing-registered-users" title="Permalink to this headline">¶</a></h3>
+<p>This applies if your app has been live and has users using before integrating MoEngage. We recommend you to set the attributes for existing registered users who
+have been using your app when they use after updating to the app with MoEngage SDK.</p>
+<p>You can do this by writing the user attributes setting code (mentioned earlier) in the first screen existing users see after updating the app.</p>
+<p>This helps your product/marketing team to target based on the attributes of all users who use the updated app.</p>
+</div>
+</div>
+<div class="section" id="user-acquisition-source-tracking">
+<h2>User Acquisition source tracking<a class="headerlink" href="#user-acquisition-source-tracking" title="Permalink to this headline">¶</a></h2>
+<p>This helps us to attribute your users with the source through which users found your app. To add Install Attribution (User Acquisition Source) tracking, add the following lines to your manifest:</p>
+<div class="highlight-python"><div class="highlight"><pre>&lt;receiver android:name=&quot;com.moe.pushlibrary.InstallReceiver&quot;&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;com.android.vending.INSTALL_REFERRER&quot;/&gt;
+        &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="geofencing">
+<h2>GeoFencing<a class="headerlink" href="#geofencing" title="Permalink to this headline">¶</a></h2>
+<p>To use geofencing, your app must request ACCESS_FINE_LOCATION. To request this permission, add the following element as a child element of the &lt;manifest&gt; element:</p>
+<div class="highlight-python"><div class="highlight"><pre>&lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot;/&gt;
+</pre></div>
+</div>
+<p>Geo-fencing is an extension of push messaging, so please complete the steps required for push notification before going any further.</p>
+<p>Add the following line to the manifest..</p>
+<div class="highlight-python"><div class="highlight"><pre>&lt;service android:name=&quot;com.moe.geofence.MOEGeoFenceIntentService&quot;&gt;&lt;/service&gt;
+</pre></div>
+</div>
+<p>To setup geofences inside the application, call setGeoFences(lat, lng, context) method. lat and lng are the location around which you wish to set the geofences. Since you can only create a maximum of 90 geofences per app user, you can use the lat/lng to create the geofences required, if you want to create more than 90 geofences across all users.</p>
+<div class="highlight-python"><div class="highlight"><pre>MoEHelper mHelper = new MoEHelper(this);
+mHelper.setGeoFences(17.1832, 23.3292, this);
+</pre></div>
+</div>
+<p>In the above example, MoEngage sets up the geofences around 17.1832,23.3292 location co-ordinates. If you are not sure about the location (or) you just want to create geofences less than 90 across your users, pass 0.0 value for both lat and lng. The app sets up the 90 nearest geofences.</p>
+</div>
+<div class="section" id="testing-geo-fencing">
+<h2>Testing Geo-fencing<a class="headerlink" href="#testing-geo-fencing" title="Permalink to this headline">¶</a></h2>
+<p>To test whether Geo-fencing is working, create a Geo-fence Campaign under the campaigns section in the dashboard. Add your current location as one of the geofence and save the campaign. Now, open the app and make sure the <strong>setGeoFences</strong> code is run. You should get a push notification with the message that was part of the campaign.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Android Integration guide</a><ul>
+<li><a class="reference internal" href="#installing-the-moengage-library-eclipse">Installing the MoEngage library - Eclipse</a><ul>
+<li><a class="reference internal" href="#step-1-get-the-latest-moengage-library-release">Step 1 - Get the latest MoEngage library release</a></li>
+<li><a class="reference internal" href="#step-2-import-the-sdk-into-your-project-s-workspace">Step 2 - Import the SDK into your project&#8217;s workspace</a></li>
+<li><a class="reference internal" href="#step-3-add-permissions-to-your-androidmanifest-xml">Step 3 - Add permissions to your AndroidManifest.xml</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#setting-up-push-notifications-through-gcm">Setting up Push Notifications through GCM</a><ul>
+<li><a class="reference internal" href="#step-1-enabling-google-cloud-messaging-gcm-in-your-google-api-console">Step 1 - Enabling Google Cloud Messaging (GCM) in your Google API Console</a></li>
+<li><a class="reference internal" href="#step-2-uploading-your-gcm-api-key-through-moengage-portal">Step 2 - Uploading your GCM API Key through MoEngage portal</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#handling-push-notifications">Handling Push Notifications</a><ul>
+<li><a class="reference internal" href="#requirements-for-rich-landing-pages-through-push-notifications-recommended">Requirements for Rich Landing pages through Push notifications (recommended)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#initializing-the-sdk-and-push-notifications">Initializing the SDK and Push Notifications</a></li>
+<li><a class="reference internal" href="#send-a-push-notification-for-testing">Send a push notification for testing</a></li>
+<li><a class="reference internal" href="#tracking-user-activity">Tracking user activity</a></li>
+<li><a class="reference internal" href="#tracking-your-first-event">Tracking your first event</a><ul>
+<li><a class="reference internal" href="#testing-event-tracking-after-integration">Testing event tracking after integration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#setting-user-attributes">Setting user attributes</a><ul>
+<li><a class="reference internal" href="#setting-custom-user-attributes">Setting custom user attributes</a></li>
+<li><a class="reference internal" href="#setting-user-attributes-for-existing-registered-users">Setting user attributes for existing registered users</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#user-acquisition-source-tracking">User Acquisition source tracking</a></li>
+<li><a class="reference internal" href="#geofencing">GeoFencing</a></li>
+<li><a class="reference internal" href="#testing-geo-fencing">Testing Geo-fencing</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="introduction.html"
+                        title="previous chapter">Introduction</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="windows.html"
+                        title="next chapter">Windows Phone Integration guide</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/android.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="windows.html" title="Windows Phone Integration guide"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="Introduction"
+             >previous</a> |</li>
+        <li><a href="index.html">MoEngage Docs 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, MoEngage Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

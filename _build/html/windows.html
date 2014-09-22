@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Windows Phone Integration guide &mdash; MoEngage Docs 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MoEngage Docs 1 documentation" href="index.html" />
+    <link rel="prev" title="Android Integration guide" href="android.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="android.html" title="Android Integration guide"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">MoEngage Docs 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="windows-phone-integration-guide">
+<h1>Windows Phone Integration guide<a class="headerlink" href="#windows-phone-integration-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installing-the-moengage-library-visual-studio">
+<h2>Installing the MoEngage library - Visual Studio<a class="headerlink" href="#installing-the-moengage-library-visual-studio" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-1-get-the-latest-moengage-library-release">
+<h3>Step 1 - Get the latest MoEngage library release<a class="headerlink" href="#step-1-get-the-latest-moengage-library-release" title="Permalink to this headline">¶</a></h3>
+<p>You must have received the latest MoEngage SDK from the team. If you have received the SDK, please proceed to the next steps. If not, please contact MoEngage team for help.</p>
+</div>
+<div class="section" id="step-2-refer-the-dll-file-to-your-project">
+<h3>Step 2 - Refer the dll file to your project<a class="headerlink" href="#step-2-refer-the-dll-file-to-your-project" title="Permalink to this headline">¶</a></h3>
+<p>Add the given MoEngageSDK.dll file to the project. Project -&gt; Add Reference -&gt; Browse for the dll file in your computer and add it as reference.</p>
+</div>
+<div class="section" id="step-3-adding-capabilities">
+<h3>Step 3 - Adding capabilities<a class="headerlink" href="#step-3-adding-capabilities" title="Permalink to this headline">¶</a></h3>
+<p>open the WMAppManifest.xml in the properties, enable the following capabilities</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ID_CAP_NETWORKING</span>
+<span class="n">ID_CAP_PUSH_NOTOFICATION</span>
+<span class="n">ID_CAP_IDENTITY_DEVICE</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="tracking-user-sessions">
+<h2>Tracking User Sessions<a class="headerlink" href="#tracking-user-sessions" title="Permalink to this headline">¶</a></h2>
+<p>In your App.xaml.cs add the following code in the respective methods..</p>
+<p>ApplicationID - a unique id will be provided to you from MoEngage. You can also find it in the &#8216;App Settings&#8217; tab of the &#8216;Settings&#8217; page of your MoEngage account.</p>
+<div class="highlight-python"><div class="highlight"><pre>private void Application_Launching(object sender, LaunchingEventArgs e)
+{
+    MoEngage.OpenSession(&quot;ApplicationID&quot;, true);
+}
+
+private void Application_Activated(object sender, ActivatedEventArgs e)
+{
+    MoEngage.OpenSession(&quot;ApplicationID&quot;, true);
+}
+
+private void Application_Deactivated(object sender, DeactivatedEventArgs e)
+{
+    MoEngage.CloseSession();
+}
+
+private void Application_Closing(object sender, ClosingEventArgs e)
+{
+    MoEngage.CloseSession();
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="tracking-notifications">
+<h2>Tracking Notifications<a class="headerlink" href="#tracking-notifications" title="Permalink to this headline">¶</a></h2>
+<p>Add the below to InitializePhoneApplication method in App.xaml.cs</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">RootFrame</span><span class="o">.</span><span class="n">Navigated</span> <span class="o">+=</span> <span class="n">MoEngage</span><span class="o">.</span><span class="n">Navigated</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-moengage-code">
+<h2>Using MoEngage code<a class="headerlink" href="#using-moengage-code" title="Permalink to this headline">¶</a></h2>
+<p>Add the below to all code files where MoEngage SDK is used.</p>
+<div class="highlight-python"><div class="highlight"><pre>using MoEngageSDK;
+</pre></div>
+</div>
+<p>Use MoEngage.&lt;method&gt; to call a method.</p>
+</div>
+<div class="section" id="tracking-your-first-event">
+<h2>Tracking your first event<a class="headerlink" href="#tracking-your-first-event" title="Permalink to this headline">¶</a></h2>
+<p>Once you&#8217;ve added dll as reference, you can track an event using trackEvent with the event name and it&#8217;s characteristics (attributes).</p>
+<p>Every event has 2 attributes, action name and key, value pairs which represent additional information about the action. Add all the additional information which you think would be useful for segmentation while creating campaigns.
+For eg. the following code tracks a purchase event of a product. We are including attributes like amount, quantity, category which describe the event we are tracking.</p>
+<div class="highlight-python"><div class="highlight"><pre>MoEngage.trackEvent(&quot;Made Purchase&quot;, new {product=&quot;Moto E&quot;, amount=7000, currency = &quot;Rs&quot;, category = &quot;Mobiles&quot;});
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-python"><div class="highlight"><pre>var attrs = new {product=&quot;Moto E&quot;, amount=7000, currency = &quot;Rs&quot;, category = &quot;Mobiles&quot;};
+MoEngage.trackEvent(&quot;Made Purchase&quot;, attrs);
+</pre></div>
+</div>
+<p>If you don&#8217;t have any attributes, just pass None as second argument. for eg.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">MoEngage</span><span class="o">.</span><span class="n">trackEvent</span><span class="p">(</span><span class="s">&quot;Made Purchase&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><em>Please make sure that you are tracking event attributes without changing their data types. For instance, in the above purchase event, amount and quantity are tracked in the numeric form. Our system detects the data type automatically unless you explicitly specify it as a string.</em></p>
+<p><em>You should track all the events relevant to your business, so that your product managers and marketers can segment your app users and create targeted campaigns.</em></p>
+<div class="section" id="testing-event-tracking-after-integration">
+<h3>Testing event tracking after integration<a class="headerlink" href="#testing-event-tracking-after-integration" title="Permalink to this headline">¶</a></h3>
+<p>To test event tracking, first you need to login to the MoEngage portal with the credentials provided for your app.</p>
+<p>After adding event tracking in the app as shown in the guide above, you can visit <a class="reference external" href="http://app.moengage.com/latestActivity">For Developers</a> link through the MoEngage portal to check whether the events are being tracked, as you use.</p>
+<img alt="_images/11.png" src="_images/11.png" />
+<p>As users use the application, events data is stored locally and sent in regular intervals of 30 seconds to avoid any performance impact. So, you might need to wait for sometime to see the events in the portal.</p>
+</div>
+</div>
+<div class="section" id="setting-user-attributes">
+<h2>Setting user attributes<a class="headerlink" href="#setting-user-attributes" title="Permalink to this headline">¶</a></h2>
+<p>Use the following lines to set User attributes like Name, Email, Mobile, Gender, etc.</p>
+<p>For eg. to set unique id for the user</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">MoEngage</span><span class="o">.</span><span class="n">SetUserAttribute</span><span class="p">(</span><span class="n">MoEngageConstants</span><span class="o">.</span><span class="n">USER_ATTRIBUTE_UNIQUE_ID</span><span class="p">,</span> <span class="n">uniqueId</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>uniqueId - unique id for the user specific to your system, so that there is a unique identifier mapping between your platform and MoEngage.</p>
+<p>You can use MoEngageConstants class to set the default user attributes like mobile number, gender, user name, brithday. Birthday has to be in the format - &#8220;mm/dd/yyyy&#8221;. The constants for these default attributes in MoEHelperConstants are mentioned below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">USER_ATTRIBUTE_UNIQUE_ID</span>
+<span class="n">USER_ATTRIBUTE_USER_EMAIL</span>
+<span class="n">USER_ATTRIBUTE_USER_MOBILE</span>
+<span class="n">USER_ATTRIBUTE_USER_NAME</span>   <span class="c"># incase you have full name</span>
+<span class="n">USER_ATTRIBUTE_USER_GENDER</span>
+<span class="n">USER_ATTRIBUTE_USER_FIRST_NAME</span> <span class="c"># incase you have first and last name separately</span>
+<span class="n">USER_ATTRIBUTE_USER_LAST_NAME</span>
+<span class="n">USER_ATTRIBUTE_USER_BDAY</span>
+<span class="n">GENDER_MALE</span> <span class="o">=</span> <span class="s">&quot;male&quot;</span><span class="p">;</span>
+<span class="n">GENDER_FEMALE</span> <span class="o">=</span> <span class="s">&quot;female&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>to set user email</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">MoEngage</span><span class="o">.</span><span class="n">SetUserAttribute</span><span class="p">(</span><span class="n">MoEngageConstants</span><span class="o">.</span><span class="n">USER_ATTRIBUTE_USER_EMAIL</span><span class="p">,</span> <span class="n">email</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>email - email of the user</p>
+<p>To set user location, use the following line</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">MoEngage</span><span class="o">.</span><span class="n">SetUserLocation</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>lat - latitude of the location
+lng - longitude of the location</p>
+<div class="section" id="setting-custom-user-attributes">
+<h3>Setting custom user attributes<a class="headerlink" href="#setting-custom-user-attributes" title="Permalink to this headline">¶</a></h3>
+<p>The above examples demonstrate how to set predefined attributes and their values. To set custom attributes use the following syntax.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">MoEngage</span><span class="o">.</span><span class="n">SetUserAttribute</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>key - the name you want to give to the attribute
+value - the value you would like to assign to it</p>
+</div>
+<div class="section" id="setting-user-attributes-for-existing-registered-users">
+<h3>Setting user attributes for existing registered users<a class="headerlink" href="#setting-user-attributes-for-existing-registered-users" title="Permalink to this headline">¶</a></h3>
+<p>This applies if your app has been live and has users using before integrating MoEngage. We recommend you to set the attributes for existing registered users who
+have been using your app when they use after updating to the app with MoEngage SDK.</p>
+<p>You can do this by writing the user attributes setting code (mentioned earlier) in the first screen existing users see after updating the app.</p>
+<p>This helps your product/marketing team to target based on the attributes of all users who use the updated app.</p>
+</div>
+<div class="section" id="enabling-and-disabling-push-notifications">
+<h3>Enabling and Disabling Push notifications<a class="headerlink" href="#enabling-and-disabling-push-notifications" title="Permalink to this headline">¶</a></h3>
+<p>To enable the push notifications use the following line</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">MoEngage</span><span class="o">.</span><span class="n">PushNotificationsEnabled</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>To disable the push notificaitons use the following line</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">MoEngage</span><span class="o">.</span><span class="n">PushNotificationsEnabled</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Windows Phone Integration guide</a><ul>
+<li><a class="reference internal" href="#installing-the-moengage-library-visual-studio">Installing the MoEngage library - Visual Studio</a><ul>
+<li><a class="reference internal" href="#step-1-get-the-latest-moengage-library-release">Step 1 - Get the latest MoEngage library release</a></li>
+<li><a class="reference internal" href="#step-2-refer-the-dll-file-to-your-project">Step 2 - Refer the dll file to your project</a></li>
+<li><a class="reference internal" href="#step-3-adding-capabilities">Step 3 - Adding capabilities</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tracking-user-sessions">Tracking User Sessions</a></li>
+<li><a class="reference internal" href="#tracking-notifications">Tracking Notifications</a></li>
+<li><a class="reference internal" href="#using-moengage-code">Using MoEngage code</a></li>
+<li><a class="reference internal" href="#tracking-your-first-event">Tracking your first event</a><ul>
+<li><a class="reference internal" href="#testing-event-tracking-after-integration">Testing event tracking after integration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#setting-user-attributes">Setting user attributes</a><ul>
+<li><a class="reference internal" href="#setting-custom-user-attributes">Setting custom user attributes</a></li>
+<li><a class="reference internal" href="#setting-user-attributes-for-existing-registered-users">Setting user attributes for existing registered users</a></li>
+<li><a class="reference internal" href="#enabling-and-disabling-push-notifications">Enabling and Disabling Push notifications</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="android.html"
+                        title="previous chapter">Android Integration guide</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/windows.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="android.html" title="Android Integration guide"
+             >previous</a> |</li>
+        <li><a href="index.html">MoEngage Docs 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, MoEngage Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
