@@ -45,8 +45,13 @@ Attributes can be either a uniqueId that your app assigns to the user or his ema
 
 ::
 
-    userId - unique id of the user, use this parameter if you want to target user based on the unique Id along with target as "user"
-    userEmail - email of the user, use this parameter if you want to target user based on the email address along with target as "user"
+    query - A JSON object with a query parameters
+    
+    sample query objects - 
+    1. {"email":"exampleemail@moengage.com"} - to query a user based on email address
+    2. {"mobile":"9663123424"} - to query a user based on mobile number
+    3. {"id":"1234"} - to query user based on the unique Id
+    
 
 A sample JSON object for sending it as part of request body would looke like
 
@@ -59,7 +64,7 @@ A sample JSON object for sending it as part of request body would looke like
     	"message": "Hello",
     	"title": "Hi",
     	"target": "user",
-    	"userId": "1234"
+    	"query": {"id":"1234"}
     }
 
 From the above parameters, we are targeting a user with unique Id as 1234. Screen names should be available for each platform, if you do not mention the screen name for a particular platform, we will not push to the user.
@@ -72,9 +77,11 @@ You will need to target the user based on the action and also based on the avail
 
 ::
 
-    eventName - event or action that the user has done in the past
-    attrName - attribute name associated with the event
-    attrValue - attribute value for the attribute name
+    query - A JSON object with a query parameters
+    
+    sample query objects - 
+    1. {"event":"purchased","attrs":{"purchase Id":"7854"}} - to find users with event "purchased" and attribute "purchaseId" as "7854"
+    2. {"event":"visited product page","attrs":{"product name":"Samsung Galaxy S4"}} - to find users with event "visited product page" and attribute "product name" as "Samsung Galaxy S4"
 
 A sample JSON object for sending it as part of request body would looke like
 ::
@@ -86,9 +93,7 @@ A sample JSON object for sending it as part of request body would looke like
     	"message": "Hello",
     	"title": "Hi",
     	"target": "action",
-    	"eventName": "purchased",
-    	"attrName": "purchase Id",
-    	"attrValue": "7854"
+    	"query": {"event":"purchased","attrs":{"purchase Id":"7854"}}
     }
 
 From the above parameters, we are targeting a user who has made a purchase with purchase Id as 7854. Screen names should be available for each platform, if you do not mention the screen name for a particular platform, we will not push to the user.
@@ -106,10 +111,10 @@ Response for Invalid API call
     "data should be provided in JSON format" - request body is not in JSON format
     "appId not found" - appId parameter not found in reqeust body
     "target not found" - target parameter not found in request body
+    "query not found" - query parameter not found in reqeust body
     "target has to be either action or user" - target value is neither "user" or "action"
-    "user atrributes not found" - none of the expected user attributes found like userId, userEmail
     "screenName not found" - screenName parameter not found in request body
     "ttl not found" - ttl parameter not found in request body
     "title not found" - title parameter not found in request body
     "message not found" - message parameter not found in request body
-    "no user found" - couldn't find any users with the mentioned parameters
+    "no user found" - couldn't find any users with the mentioned query parameters
