@@ -408,17 +408,45 @@ Reference: MobileAppTracking (MAT) Android Integration guide (https://developers
 
 ::
 
-    // Add the below code wherever you are tracking the Advertising ID for HasOffers MAT
+    // Collect Google Play Advertising ID; REQUIRED for attribution of Android apps distributed via Google Play
+    new Thread(new Runnable() {
+        @Override public void run() {
+            // See sample code at http://developer.android.com/google/play-services/id.html
+            try {
+                Info adInfo = AdvertisingIdClient.getAdvertisingIdInfo(getApplicationContext());
+                
+                // mobileAppTracker.setGoogleAdvertisingId(adInfo.getId(), adInfo.isLimitAdTrackingEnabled());
+                
+                // Add the below code wherever you are tracking the Advertising ID for HasOffers MAT shown above
 
-    MoEHelper.getInstance(mCurrentContext).setUserAttribute("GOOGLE_ADVERTISING_ID", adInfo.getId());
-    MoEHelper.getInstance(mCurrentContext).setUserAttribute("GOOGLE_ADVERTISING_ENABLED", adInfo.isLimitAdTrackingEnabled());
+                MoEHelper.getInstance(mCurrentContext).setUserAttribute("GOOGLE_ADVERTISING_ID", adInfo.getId());
+                MoEHelper.getInstance(mCurrentContext).setUserAttribute("GOOGLE_ADVERTISING_ENABLED", adInfo.isLimitAdTrackingEnabled());
+                
+            } catch (IOException e) {
+                // Unrecoverable error connecting to Google Play services (e.g.,
+                // the old version of the service doesn't support getting AdvertisingId).
+                //mobileAppTracker.setAndroidId(Secure.getString(getContentResolver(), Secure.ANDROID_ID));
+                MoEHelper.getInstance(mCurrentContext).setUserAttribute("ANDROID_ID", Secure.getString(getContentResolver(), Secure.ANDROID_ID));
+            } catch (GooglePlayServicesNotAvailableException e) {
+                // Google Play services is not available entirely.
+                //mobileAppTracker.setAndroidId(Secure.getString(getContentResolver(), Secure.ANDROID_ID));
+                MoEHelper.getInstance(mCurrentContext).setUserAttribute("ANDROID_ID", Secure.getString(getContentResolver(), Secure.ANDROID_ID));
+            } catch (GooglePlayServicesRepairableException e) {
+                // Encountered a recoverable error connecting to Google Play services.
+                //mobileAppTracker.setAndroidId(Secure.getString(getContentResolver(), Secure.ANDROID_ID));
+                MoEHelper.getInstance(mCurrentContext).setUserAttribute("ANDROID_ID", Secure.getString(getContentResolver(), Secure.ANDROID_ID));
+            } catch (NullPointerException e) {
+                // getId() is sometimes null
+                //mobileAppTracker.setAndroidId(Secure.getString(getContentResolver(), Secure.ANDROID_ID));
+                MoEHelper.getInstance(mCurrentContext).setUserAttribute("ANDROID_ID", Secure.getString(getContentResolver(), Secure.ANDROID_ID));
+            }
+        }
+    }).start();
 
-    // if you are taking ANDROID ID for HasOffers MAT, do the below as well.
+    // if you are separately taking ANDROID ID for HasOffers MAT, do the below as well.
     
     import android.provider.Settings.Secure;
     MoEHelper.getInstance(mCurrentContext).setUserAttribute("ANDROID_ID", Secure.getString(getContentResolver(), Secure.ANDROID_ID));
-    
-
 
     
 GeoFencing (Optional - not recommended for all apps)
