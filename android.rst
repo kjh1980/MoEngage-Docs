@@ -400,7 +400,7 @@ This helps us to attribute your users with the source through which users found 
 MoEngage Integration with HasOffers MAT (MobileAppTracking)
 ----------------------------------------------------------
 
-The integration works by notifying MoEngage of installs to their API using their REST API. To do so, you will need to set up a server postback in your MobileAppTracking account for each one of your mobile apps. Here we are focusing only on the frontend.
+The integration works by notifying MoEngage of installs using HasOffers MAT REST API. To do so, you will need to set up a server postback in your MobileAppTracking account for each one of your mobile apps. Here we are focusing only on the frontend.
 
 In the app when implementing MoEngage and MobileAppTracking SDKs, you would collect the Google Advertising ID and/or Android ID for MAT Integration. You'll need to set these unique device identifiers as user attributes for mapping between MoEngage and MobileAppTracking platforms.
 
@@ -443,7 +443,7 @@ Reference: MobileAppTracking (MAT) Android Integration guide (https://developers
         }
     }).start();
 
-    // if you are separately taking ANDROID ID for HasOffers MAT, do the below as well.
+    // if you are separately taking ANDROID ID for HasOffers MAT, add the following line of code.
     
     import android.provider.Settings.Secure;
     MoEHelper.getInstance(mCurrentContext).setUserAttribute("ANDROID_ID", Secure.getString(getContentResolver(), Secure.ANDROID_ID));
