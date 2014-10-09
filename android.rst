@@ -396,8 +396,33 @@ This helps us to attribute your users with the source through which users found 
             </intent-filter>
     </receiver>
     
-GeoFencing 
---------------------------------
+
+MoEngage Integration with HasOffers MAT (MobileAppTracking)
+----------------------------------------------------------
+
+The integration works by notifying MoEngage of installs to their API using their REST API. To do so, you will need to set up a server postback in your MobileAppTracking account for each one of your mobile apps. Here we are focusing only on the frontend.
+
+In the app when implementing MoEngage and MobileAppTracking SDKs, you would collect the Google Advertising ID and/or Android ID for MAT Integration. You'll need to set these unique device identifiers as user attributes for mapping between MoEngage and MobileAppTracking platforms.
+
+Reference: MobileAppTracking (MAT) Android Integration guide (https://developers.mobileapptracking.com/android-sdk/)
+
+::
+
+    // Add the below code wherever you are tracking the Advertising ID for HasOffers MAT
+
+    MoEHelper.getInstance(mCurrentContext).setUserAttribute("GOOGLE_ADVERTISING_ID", adInfo.getId());
+    MoEHelper.getInstance(mCurrentContext).setUserAttribute("GOOGLE_ADVERTISING_ENABLED", adInfo.isLimitAdTrackingEnabled());
+
+    // if you are taking ANDROID ID for HasOffers MAT, do the below as well.
+    
+    import android.provider.Settings.Secure;
+    MoEHelper.getInstance(mCurrentContext).setUserAttribute("ANDROID_ID", Secure.getString(getContentResolver(), Secure.ANDROID_ID));
+    
+
+
+    
+GeoFencing (Optional - not recommended for all apps)
+---------------------------------------------------
 
 To use geofencing, your app must request ACCESS_FINE_LOCATION. To request this permission, add the following element as a child element of the <manifest> element:
 
