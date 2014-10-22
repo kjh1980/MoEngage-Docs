@@ -178,7 +178,20 @@ You can do this by writing the user attributes setting code (mentioned earlier) 
 This helps your product/marketing team to target based on the attributes of all users who use the updated app.
 
 Push Notifications
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------------------
+
+If you already have production and development key file and certificate files, Proceed to Uploading Key file to MoEngage section.
+
 
 .. image:: images/apns1.png
 
+
+
+Uploading Key file to MoEngage
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. Select the environment , sandbox or production
+2. Upload the pem file which contains both certificate and key information.
+3. Enter the password for the key.
+
+.. image:: images/apns20.png
