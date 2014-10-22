@@ -194,4 +194,4 @@ Uploading Key file to MoEngage
 2. Upload the pem file which contains both certificate and key information.
 3. Enter the password for the key.
 
-.. image:: images/apns20.png
+.. image:: images/apnsmoe.png
