@@ -180,3 +180,5 @@ This helps your product/marketing team to target based on the attributes of all 
 Push Notifications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. image:: images/apns1.png
+
