@@ -190,8 +190,31 @@ If you already have production and development key file and certificate files, P
 Uploading Key file to MoEngage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Open the settings page, in the App Setting tabs, following the steps for uploading the key.
+
 1. Select the environment , sandbox or production
 2. Upload the pem file which contains both certificate and key information.
 3. Enter the password for the key.
 
 .. image:: images/apnsmoe.png
+
+
+Adding push notification code
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Include the following code sample in your application:didFinishLaunchingWithOptions: method:
+
+::
+
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+	(UIRemoteNotificationTypeAlert |
+	UIRemoteNotificationTypeBadge |
+	UIRemoteNotificationTypeSound)];
+    } else {
+	UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge|UIUserNotificationTypeAlert | UIUserNotificationTypeSound) categories:nil];
+	[[UIApplication sharedApplication] registerForRemoteNotifications];
+	[[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }
+    
+    
