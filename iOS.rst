@@ -10,57 +10,52 @@ Step 1 - Get the latest MoEngage library release
 
 You must have received the latest MoEngage SDK from the team. If you have received the SDK, please proceed to the next steps. If not, please contact MoEngage team for help.
 
-Step 2 - Refer the dll file to your project
+Step 2 - Adding library and header files to the project 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Add the given MoEngageSDK.dll file to the project. Project -> Add Reference -> Browse for the dll file in your computer and add it as reference.
+Add the given library file (.a extension) to your project. Please check the following page for instructions.
+https://developer.apple.com/library/ios/technotes/iOSStaticLibraries/Articles/configuration.html
 
-Tracking User Sessions
+Add the given header files (.h extensions) , by dragging and dropping the files in to your project.
+
+After these 2 steps you are all set to use the MoEngage Library now.
+
+App Delegate Changes
 ----------------------
-In your App.xaml.cs add the following code in the respective methods..
+In your AppDelegate.m add the following code in the respective methods..
 
 ApplicationID - a unique id will be provided to you from MoEngage. You can also find it in the 'App Settings' tab of the 'Settings' page of your MoEngage account.
 
 ::
 
-    private void Application_Launching(object sender, LaunchingEventArgs e)
-    {               
-        MoEngage.OpenSession("ApplicationID", true);
-    }
-    
-    private void Application_Activated(object sender, ActivatedEventArgs e)
-    {
-        MoEngage.OpenSession("ApplicationID", true);
-    }
-    
-    private void Application_Deactivated(object sender, DeactivatedEventArgs e)
-    {
-        MoEngage.CloseSession();
-    }
-    
-    private void Application_Closing(object sender, ClosingEventArgs e)
-    {
-        MoEngage.CloseSession();
-    }
+	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
+	{
+    		[[MoEngage sharedInstance] initializeWithApiKey:@"ApplicationID" inApplication:application withLaunchOptions:launchOptions];
+    		return YES;
+	}
 
+	- (void)applicationDidEnterBackground:(UIApplication *)application {
+    		[[MoEngage sharedInstance] stop:application];
+	}
 
-Tracking Notifications
-------------------------------------
-Add the below to InitializePhoneApplication method in App.xaml.cs
+	- (void)applicationDidBecomeActive:(UIApplication *)application {
+    		[[MoEngage sharedInstance]applicationBecameActiveinApplication:application];
+	}
 
-::
+	- (void)applicationWillTerminate:(UIApplication *)application {
+		[[MoEngage sharedInstance]applicationTerminated:application];
+	}
 
-    RootFrame.Navigated += MoEngage.Navigated;
+	- (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo 
+	{
+    		[[MoEngage sharedInstance]didReceieveNotificationinApplication:application withInfo:userInfo];
+	}
 
-Using MoEngage code 
--------------------------
-Add the below to all code files where MoEngage SDK is used.
+	- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+	{
+    		[[MoEngage sharedInstance]registerForPush:deviceToken];
+	}
 
-::
-
-    using MoEngageSDK;
-    
-Use MoEngage.<method> to call a method.
 
 Tracking your first event
 -------------------------
