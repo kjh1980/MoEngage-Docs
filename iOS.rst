@@ -262,6 +262,26 @@ Combine the certificate and key into a single .pem file:
     cat yourappnamecert.pem yourappnamekey.pem > finalkeytobeuploaded.pem
 
 
+Making the Provisioning Profile
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Click the Provisioning Profiles button in the sidebar and click the + button.
+Create new provisioning profile
+This will open up the iOS provisioning profile wizard.
+Select the “iOS App development” option button in the first step of the wizard and press Continue.
+
+.. image:: images/apns15.png
+
+Select the yourappname app id that you created in the previous section. This will ensure that this provisioning profile is explicitly tied to the PushChat app.
+
+.. image:: images/apns16.png
+
+Select Certificate for Provisioning profile
+Select the devices you want to include in this provisioning profile. Since you’re creating the development profile you would typically select the devices you use for development here.
+Select devices for development provisioning profile
+Set the provisioning profile name as “Yourappname Development” as shown below.
+Press the Download button, this will download the newly created Development provisioning profile.
+Add the provisioning profile to Xcode by double-clicking it or dragging it onto the Xcode icon.
+
 
 Uploading Key file to MoEngage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
