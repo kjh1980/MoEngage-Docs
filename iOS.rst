@@ -60,29 +60,33 @@ ApplicationID - a unique id will be provided to you from MoEngage. You can also 
 Tracking your first event
 -------------------------
 
-Once you've added dll as reference, you can track an event using trackEvent with the event name and it's characteristics (attributes).
+You can track an event using trackEvent with the event name and it's characteristics (attributes).
 
-Every event has 2 attributes, action name and key, value pairs which represent additional information about the action. Add all the additional information which you think would be useful for segmentation while creating campaigns.
-For eg. the following code tracks a purchase event of a product. We are including attributes like amount, quantity, category which describe the event we are tracking.
-
-::
-
-    MoEngage.trackEvent("Made Purchase", new {product="Moto E", amount=7000, currency = "Rs", category = "Mobiles"});
-
-or
+Every event has 2 attributes, action name and key, value pairs as NSMutableDictionary which stores additional information about the action. Add all the additional information which you think would be useful for segmentation while creating campaigns.
+For eg. the following code tracks a purchase event of a product. We are including attributes like product, category which describe the event we are tracking.
 
 ::
 
-    var attrs = new {product="Moto E", amount=7000, currency = "Rs", category = "Mobiles"};
-    MoEngage.trackEvent("Made Purchase", attrs);
-    
-    
-If you don't have any attributes, just pass None as second argument. for eg.
+
+    NSMutableDictionary* mut_dict = [NSMutableDictionary dictionaryWithDictionary:@{@"product":@"Moto E",@"category":@"Mobiles"}];
+    [[MoEngage sharedInstance]trackEvent:@"Made Purchase" andPayload:mut_dict];
+
+If you don't have any attributes, just pass nil as second argument. for eg.
 
 ::
 
-    MoEngage.trackEvent("Made Purchase", None);
+    [[MoEngage sharedInstance]trackEvent:@"Made Purchase" andPayload:nil];
     
+
+
+To pass location as key value pairs, Use the following approach
+
+for eg. event name is "loaction_search", where we have to pass "loc" as additional information with values as latitude and longitude of the location.
+
+::
+    NSMutableDictionary *mut_dict = [[NSMutableDictionary alloc]init];
+    [MoEngage setLocationwithLat:79.3249 lng:32.328 withName:@"loc" inDictionary:mut_dict];
+    [[MoEngage sharedInstance]trackEvent:@"location_search" andPayload:mut_dict];
 
 *Please make sure that you are tracking event attributes without changing their data types. For instance, in the above purchase event, amount and quantity are tracked in the numeric form. Our system detects the data type automatically unless you explicitly specify it as a string.*
 
@@ -101,8 +105,7 @@ After adding event tracking in the app as shown in the guide above, you can visi
 
 .. image:: images/11.png
 
-As users use the application, events data is stored locally and sent in regular intervals of 30 seconds to avoid any performance impact. So, you might need to wait for sometime to see the events in the portal.
-
+As users use the application, events data is stored locally and sent as a batch at app close or termination to avoid any performance impact. So, you should close or terminate the app to see the events in the portal.
 
 
 
@@ -115,11 +118,11 @@ For eg. to set unique id for the user
 
 ::
 
-    MoEngage.SetUserAttribute(MoEngageConstants.USER_ATTRIBUTE_UNIQUE_ID, uniqueId);
+    [[MoEngage sharedInstance]setUserAttribute:uniqueId forKey:USER_ATTRIBUTE_UNIQUE_ID];
     
 uniqueId - unique id for the user specific to your system, so that there is a unique identifier mapping between your platform and MoEngage.
 
-You can use MoEngageConstants class to set the default user attributes like mobile number, gender, user name, brithday. Birthday has to be in the format - "mm/dd/yyyy". The constants for these default attributes in MoEHelperConstants are mentioned below:
+You can also set the default user attributes like mobile number, gender, user name, brithday. Birthday has to be in the format - "mm/dd/yyyy". The constants for these default attributes in MoEHelperConstants are mentioned below:
 
 ::
 
@@ -134,19 +137,19 @@ You can use MoEngageConstants class to set the default user attributes like mobi
     GENDER_MALE = "male";
     GENDER_FEMALE = "female";
 
-to set user email
+for eg. to set email attribute for a user
 
 ::
 
-    MoEngage.SetUserAttribute(MoEngageConstants.USER_ATTRIBUTE_USER_EMAIL, email);
+    [[MoEngage sharedInstance]setUserAttribute:email forKey:USER_ATTRIBUTE_USER_EMAIL];
     
 email - email of the user
 
-To set user location, use the following line
+To set user location, use the following syntax
 
 ::
 
-    MoEngage.SetUserLocation(lat, lng);
+    [[MoEngage sharedInstance] setUserLocationwithLatitude:lat withLongitude:lng];
 
 lat - latitude of the location
 lng - longitude of the location
@@ -158,7 +161,7 @@ The above examples demonstrate how to set predefined attributes and their values
 
 ::
 
-    MoEngage.SetUserAttribute(key, value);
+    [[MoEngage sharedInstance]setUserAttribute:value forKey:key];
 
 key - the name you want to give to the attribute
 value - the value you would like to assign to it
@@ -174,19 +177,6 @@ You can do this by writing the user attributes setting code (mentioned earlier) 
 
 This helps your product/marketing team to target based on the attributes of all users who use the updated app.
 
-Enabling and Disabling Push notifications
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-To enable the push notifications use the following line
-
-::
-
-    MoEngage.PushNotificationsEnabled = true;
-
-To disable the push notificaitons use the following line
-
-::
-
-    MoEngage.PushNotificationsEnabled = false;
-
+Push Notifications
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
