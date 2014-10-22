@@ -202,6 +202,43 @@ Save the private key as Yourappname.p12 and enter a passphrase.
 
 .. image:: images/apns13.png
 
+
+Creating the App ID and SSL Certificate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Log in to the iOS Dev Center and “Select the Certificates, Identifiers and Profiles” from the right panel. Select Certificates in the iOS Apps section.
+Go to App IDs in the Identifiers and click the + button.
+
+.. image:: images/apns6.png
+
+Fill the following details in the window presented:
+App ID Description: yourappname
+In the App Services make sure you Check the Push Notifications Checkbox
+Explicit App ID: your app bundle id (in the format com.example.exampleapp)
+
+Press the Continue button. You will be asked to verify the details of the app id, if everything seems okay click Submit.
+You have successfully registered a new App ID.
+
+After you have made the App ID, it shows up in the App IDs list. Select the yourappname app ID from the list. This will open up a window as shown below:
+
+.. image:: images/apns8.png
+
+There are two orange lights that say “Configurable” in the Development and Distribution column. This means your App ID can be used with push, but you still need to set this up. Click on the Edit button to configure these settings.
+
+.. image:: images/apns9.png
+
+Scroll down to the Push Notifications section and select the Create Certificate button in the Development SSL Certificate section.
+
+.. image:: images/apns11.png
+
+The “Add iOS Certificate” wizard comes up, The first thing it asks you is to generate a Certificate Signing Request. You already did that, so click Continue. In the next step you upload the CSR. Choose the CSR file that you generated earlier and click Generate.
+
+.. image:: images/apns12.png
+
+In the Your certificate is ready window, Download the certificate, it is named “aps_development.cer”.
+
+
+
+
 Uploading Key file to MoEngage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
