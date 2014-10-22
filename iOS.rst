@@ -183,14 +183,29 @@ Push Notifications
 If you already have production and development key file and certificate files, Proceed to Uploading Key file to MoEngage section.
 
 
+Generating the Certificate Signing Request (CSR)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Open Keychain Access on your Mac (it is in Applications/Utilities) and choose the menu option Request a Certificate from a Certificate Authority… .
+
 .. image:: images/apns1.png
 
+You should now see the following window:
 
+.. image:: images/apns2.png
+
+Enter your email address here. Enter your app name for Common Name. This allows us to easily find the private key later.
+Check Saved to disk and click Continue. Save the file as “Yourappname.certSigningRequest”.
+
+Go to the Keys section of Keychain Access, you will see that a new private key has appeared in your keychain. Right click it and choose Export.
+Save the private key as Yourappname.p12 and enter a passphrase.
+
+.. image:: images/apns13.png
 
 Uploading Key file to MoEngage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Open the settings page, in the App Setting tabs, following the steps for uploading the key.
+Open the settings page in the MoEngage Dashboard, under the App Settings tab, following the steps for uploading the key.
 
 1. Select the environment , sandbox or production
 2. Upload the pem file which contains both certificate and key information.
@@ -214,7 +229,6 @@ Include the following code sample in your application:didFinishLaunchingWithOpti
     } else {
 	UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge|UIUserNotificationTypeAlert | UIUserNotificationTypeSound) categories:nil];
 	[[UIApplication sharedApplication] registerForRemoteNotifications];
-	[[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     }
     
     
