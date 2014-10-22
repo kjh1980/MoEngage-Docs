@@ -236,6 +236,30 @@ The “Add iOS Certificate” wizard comes up, The first thing it asks you is to
 
 In the Your certificate is ready window, Download the certificate, it is named “aps_development.cer”.
 
+Making a PEM file
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+So now you have 2 files:
+The private key as a p12 file  - yourappname.p12
+The SSL certificate -  aps_development.cer
+
+Convert the .cer file into a .pem file:
+::
+
+    $ openssl x509 -in aps_development.cer -inform der -out yourappnamecert.pem
+
+Convert the private key’s .p12 file into a .pem file:
+::
+
+    $ openssl pkcs12 -nocerts -out yourappnamekey.pem -in yourappname.p12
+    Enter Import Password: 
+    MAC verified OK
+    Enter PEM pass phrase: 
+    Verifying - Enter PEM pass phrase:
+
+Combine the certificate and key into a single .pem file:
+::
+
+    cat yourappnamecert.pem yourappnamekey.pem > finalkeytobeuploaded.pem
 
 
 
@@ -244,7 +268,7 @@ Uploading Key file to MoEngage
 
 Open the settings page in the MoEngage Dashboard, under the App Settings tab, following the steps for uploading the key.
 
-1. Select the environment , sandbox or production
+1. Select the environment, sandbox or production
 2. Upload the pem file which contains both certificate and key information.
 3. Enter the password for the key.
 
