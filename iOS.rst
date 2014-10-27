@@ -84,6 +84,7 @@ To pass location as key value pairs, Use the following approach
 for eg. event name is "loaction_search", where we have to pass "loc" as additional information with values as latitude and longitude of the location.
 
 ::
+
     NSMutableDictionary *mut_dict = [[NSMutableDictionary alloc]init];
     [MoEngage setLocationwithLat:79.3249 lng:32.328 withName:@"loc" inDictionary:mut_dict];
     [[MoEngage sharedInstance]trackEvent:@"location_search" andPayload:mut_dict];
@@ -313,3 +314,29 @@ Include the following code sample in your application:didFinishLaunchingWithOpti
     }
     
     
+Custom Handler for Deep Linking push
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In order to open "Deep Links" that are sent to the device as a Key/Value pair along with a push notification you must implement a custom handler.
+
+::
+
+    - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  	// Code should be inserted here to handle when the app just launched ...
+  	NSDictionary *pushDictionary = [launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+  	if (pushDictionary) {
+    	    [self customPushHandler:pushDictionary];
+  	}
+    }
+    
+    - (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+  	[self customPushHandler:userInfo];
+    }
+    
+    - (void) customPushHandler:(NSDictionary *)notification {
+  	if (notification !=nil && [notification objectForKey:@"app_extra"] != nil) {
+            NSDictionary* app_extra_dict = [notification objectForKey:@"app_extra"];
+            NSLog(@"%@",app_extra_dict);
+            // Here based on the extras key-value pair, you can open specific screens that's part of your app
+    	}
+    }
