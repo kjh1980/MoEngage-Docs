@@ -289,9 +289,8 @@ Uploading Key file to MoEngage
 
 Open the settings page in the MoEngage Dashboard, under the App Settings tab, following the steps for uploading the key.
 
-1. Select the environment, sandbox or production
-2. Upload the pem file which contains both certificate and key information.
-3. Enter the password for the key.
+1. Upload the pem file which contains both certificate and key information.
+2. Enter the password for the key.
 
 .. image:: images/apnsmoe.png
 
