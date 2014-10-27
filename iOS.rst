@@ -292,7 +292,7 @@ Open the settings page in the MoEngage Dashboard, under the App Settings tab, fo
 1. Upload the pem file which contains both certificate and key information.
 2. Enter the password for the key.
 
-.. image:: images/apnsmoe.png
+.. image:: images/apnsmoe2.png
 
 
 Adding push notification code
