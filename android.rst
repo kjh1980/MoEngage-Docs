@@ -198,14 +198,26 @@ Put the following code in every activity of the app. This step is crucial for al
 ::
 
     // in onStart()
-    MoEHelper.getInstance(this).onStart(this);
+    mHelper.onStart(this);
     
     // in onStop()
-    MoEHelper.getInstance(this).onStop(this);  
+    mHelper.onStop(this);  
+    
+    // in onResume()
+    mHelper.onResume(this);
+    
+    // in onPuase()
+    mHelper.onPause(this);
 
 as shown in the codes below
 
 ::
+
+    private MoEHelper mHelper;
+    protected void onCreate(Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+	    mHelper = new MoEHelper(this);
+	}
 
     protected void onStart() {
         super.onStart();
@@ -215,6 +227,16 @@ as shown in the codes below
         super.onStop();
         MoEHelper.getInstance(this).onStop(this);
     }
+    
+    protected void onPause() {
+        super.onPause();
+        mHelper.onPause(this);
+    }
+	
+	protected void onResume() {
+		super.onResume();
+		mHelper.onResume(this);
+	}
 
 
 Tracking your first event
@@ -480,9 +502,22 @@ Testing Geo-fencing
 
 To test whether Geo-fencing is working, create a Geo-fence Campaign under the campaigns section in the dashboard. Add your current location as one of the geofence and save the campaign. Now, open the app and make sure the **setGeoFences** code is run. You should get a push notification with the message that was part of the campaign.
 
+Notification Center
+--------------------------------
+
+Add the following activity to the manifest file.
+
+::
+
+    <activity
+        android:name="com.moe.pushlibrary.activities.MoEInboxActivity">
+    </activity>
+    
+To Change the name of the Notification Center Title on the Action Bar - 
     
 CheckList
 ---------------------------------------------------
+
 1. Make sure you have added onStop() and onStart() methods of MoEngage in all your activities.
 2. Test the Push Campaign on real device.
 3. Track Events comprehensively that meet your marketing goals.
