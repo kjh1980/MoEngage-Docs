@@ -215,9 +215,9 @@ as shown in the codes below
 
     private MoEHelper mHelper;
     protected void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    mHelper = new MoEHelper(this);
-	}
+    	super.onCreate(savedInstanceState);
+    	mHelper = new MoEHelper(this);
+    }
 
     protected void onStart() {
         super.onStart();
@@ -233,10 +233,10 @@ as shown in the codes below
         mHelper.onPause(this);
     }
 	
-	protected void onResume() {
-		super.onResume();
-		mHelper.onResume(this);
-	}
+    protected void onResume() {
+    	super.onResume();
+    	mHelper.onResume(this);
+    }
 
 
 Tracking your first event
