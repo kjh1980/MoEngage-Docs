@@ -518,11 +518,11 @@ To Change the name of the Notification Center Title on the Action Bar - change t
 In-app Messaging 
 ---------------------------------
 
-Make sure you have onResume() and onPause() methods of MoEngage called in all the activities you would like to show In-app Message. We recommend not to use these methods in your Splash Screen activity.
+Make sure you have *onResume()* and *onPause()* methods of MoEngage called in all the activities you would like to show In-app Message. We recommend not to use these methods in your Splash Screen activity.
     
 CheckList
 ---------------------------------------------------
 
-1. Make sure you have added onStop(), onStart(), onPause(), onResume() methods of MoEngage in all your activities.
+1. Make sure you have added *onStop()*, *onStart()*, *onPause()*, *onResume()* methods of MoEngage in all your activities.
 2. Test the Push Campaign on real device.
 3. Track Events comprehensively that meet your marketing goals.
