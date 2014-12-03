@@ -515,6 +515,14 @@ Add the following activity to the manifest file.
     
 To Change the name of the Notification Center Title on the Action Bar - change the resource name of "moe_inbox_name" in strings.xml
 
+To get the unread messages count, call the following method of MoEHelper Class in onResume() of your activity.
+
+::
+
+    mHelper.getUnreadMessagesCount()
+    
+    
+
 In-app Messaging 
 ---------------------------------
 
