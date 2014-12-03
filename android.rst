@@ -522,6 +522,9 @@ To get the unread messages count, call the following method of MoEHelper Class i
     mHelper.getUnreadMessagesCount()
     
     
+Call the **MoEInboxActivity** from the ActionBar or the place where you show the NotificationCenter Icon.
+    
+    
 
 In-app Messaging 
 ---------------------------------
