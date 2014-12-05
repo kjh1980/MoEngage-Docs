@@ -536,6 +536,11 @@ In-app Messaging
 
 Make sure you have **onResume()** and **onPause()** methods of MoEngage called in all the activities you would like to show In-app Message. We recommend not to use these methods in your Splash Screen activity.
 
+Testing In-app Messaging
+---------------------------------
+
+In the dashboard, create a In-app Messaging campaign (Campaigns -> Create Campaign -> In-app Messaging). Now open the app to see the In app message popup.
+
     
 CheckList
 ---------------------------------------------------
