@@ -505,6 +505,8 @@ To test whether Geo-fencing is working, create a Geo-fence Campaign under the ca
 Notification Center
 --------------------------------
 
+.. image:: images/inbox1.png
+
 Add the following activity to the manifest file.
 
 ::
@@ -529,7 +531,10 @@ Call the **MoEInboxActivity** from the ActionBar or the place where you show the
 In-app Messaging 
 ---------------------------------
 
+.. image:: images/inapp1.png
+
 Make sure you have **onResume()** and **onPause()** methods of MoEngage called in all the activities you would like to show In-app Message. We recommend not to use these methods in your Splash Screen activity.
+
     
 CheckList
 ---------------------------------------------------
