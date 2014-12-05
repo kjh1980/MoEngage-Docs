@@ -52,7 +52,7 @@ locating the your project number, uploading your Google API Project key to MoEng
 Step 1 - Enabling Google Cloud Messaging (GCM) in your Google API Console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To enable Google Cloud Messaging (GCM) for Android, there are a few preliminary steps that must be taken.
+To enable Google Cloud Messaging (GCM) for Android, there are a few steps needed.
 You will first need to turn on the Google Cloud Messaging Services from `Google's API Console page`_.
 If you do you not have a Google API project yet, the following pop up will appear prompting you to create a project.
 
