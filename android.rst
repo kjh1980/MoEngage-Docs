@@ -502,6 +502,7 @@ Testing Geo-fencing
 
 To test whether Geo-fencing is working, create a Geo-fence Campaign under the campaigns section in the dashboard. Add your current location as one of the geofence and save the campaign. Now, open the app and make sure the **setGeoFences** code is run. You should get a push notification with the message that was part of the campaign.
 
+
 Notification Center
 --------------------------------
 
