@@ -221,11 +221,11 @@ as shown in the codes below
 
     protected void onStart() {
         super.onStart();
-        MoEHelper.getInstance(this).onStart(this);
+        mHelper.onStart(this);
     }
     protected void onStop() {
         super.onStop();
-        MoEHelper.getInstance(this).onStop(this);
+        mHelper.onStop(this);
     }
     
     protected void onPause() {
