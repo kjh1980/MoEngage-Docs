@@ -14,4 +14,3 @@ The main documentation for the site is organized into the following sections:
     windows
     transactional_api
     iOS
-    dashboard
