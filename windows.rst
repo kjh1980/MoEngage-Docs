@@ -203,5 +203,27 @@ To disable the push notificaitons use the following line
 ::
 
     MoEngage.PushNotificationsEnabled = false;
+    
+InApp Messages
+^^^^^^^^^^^^^^^
+
+In order to receive any InApp Messages, developer are just suppose to call a method [getInAppMessage] on any page they want to show InApp.
+
+::
+
+    MoEngage.getInAppMessage();
+
+:: 
+
+For example: 
+Developer can call this method in overidden method OnNavigatedTo(NavigationEventArgs e).
+
+::
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        MoEngage.getInAppMessage();
+    }
+
 
 
