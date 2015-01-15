@@ -81,7 +81,7 @@ If you don't have any attributes, just pass nil as second argument. for eg.
 
 To pass location as key value pairs, Use the following approach
 
-for eg. event name is "loaction_search", where we have to pass "loc" as additional information with values as latitude and longitude of the location.
+for eg. event name is "location_search", where we have to pass "loc" as additional information with values as latitude and longitude of the location.
 
 ::
 
@@ -240,8 +240,8 @@ In the Your certificate is ready window, Download the certificate, it is named â
 Making a PEM file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 So now you have 2 files:
-The private key as a p12 file  - yourappname.p12
-The SSL certificate -  aps_development.cer
+The private key as a p12 file  - yourappname.p12 and
+the SSL certificate -  aps_development.cer
 
 Convert the .cer file into a .pem file:
 ::
@@ -309,6 +309,7 @@ Include the following code sample in your application:didFinishLaunchingWithOpti
 	UIRemoteNotificationTypeSound)];
     } else {
 	UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge|UIUserNotificationTypeAlert | UIUserNotificationTypeSound) categories:nil];
+	[[UIApplication sharedApplication] registerUserNotificationSettings:settings];
 	[[UIApplication sharedApplication] registerForRemoteNotifications];
     }
     
