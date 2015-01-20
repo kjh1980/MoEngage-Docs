@@ -13,8 +13,7 @@ You must have received the latest MoEngage SDK from the team. If you have receiv
 Step 2 - Import the SDK into your project's workspace
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Add the given MoEngage-Android-SDK.jar file to the project, by copying the jar file to the libs folder. If there is no libs folder please
-create a libs folder.
+Import the SDK folder in to the project workspace and add it as a library project to your app.
 
 *Make sure that you have the latest android support jar file (android-support-v4.jar) accessable to the project.*
 
