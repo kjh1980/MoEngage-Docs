@@ -189,6 +189,7 @@ You can do this by writing the user attributes setting code (mentioned earlier) 
 
 This helps your product/marketing team to target based on the attributes of all users who use the updated app.
 
+
 Enabling and Disabling Push notifications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
