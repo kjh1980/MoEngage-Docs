@@ -191,7 +191,7 @@ This helps your product/marketing team to target based on the attributes of all 
 
 
 Enabling and Disabling Push notifications
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------------------
 
 To enable the push notifications use the following line
 
@@ -206,7 +206,7 @@ To disable the push notificaitons use the following line
     MoEngage.PushNotificationsEnabled = false;
     
 InApp Messages
-^^^^^^^^^^^^^^^
+-------------------------------------------------
 
 In order to receive any InApp Messages, developer are just suppose to call a method [getInAppMessage] on any page they want to show InApp.
 
