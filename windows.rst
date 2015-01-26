@@ -212,19 +212,47 @@ In order to receive any InApp Messages, developer are just suppose to call a met
 
 ::
 
-    MoEngage.getInAppMessage();
+    MoEngage.getInAppMessage(bool autoHandle);
 
-:: 
+
+Set 'autoHandle' parameter to 'false' if you want to handle the InApp action button click event,otherwise if set to 'true' our SDK will handle the click event.
+
+To handle action button click,subscribe an eventHandler to event 'InAppActionButtonClicked':
+
+::
+
+    MoEngage.InAppActionButtonClicked += MoEngage_InAppActionButtonClicked;
+ 
+
+::
+
+    private void MoEngage_InAppActionButtonClicked(InAppMessagesEventArgs e)
+        {
+            //InAppMessagesEventArgs arguments consists of navigationUri and collection as Dictionary.
+            
+            //navigationUri can be page Uri or Web Url
+            
+            //the key/value pair in the navigationUri could be retrieved from collection dictionary.
+            
+            Debug.WriteLine(e.navigationUri); 
+            foreach (KeyValuePair<string, string> x in e.collection)
+            {
+                Debug.WriteLine("Key: " + x.Key + "," + " Value: " + x.Value);
+            }
+            
+        }
+
 
 For example: 
 Developer can call this method in overidden method OnNavigatedTo(NavigationEventArgs e).
 
 ::
-
+    
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
-        MoEngage.getInAppMessage();
+        MoEngage.getInAppMessage(false);
     }
+    
 
 
 
