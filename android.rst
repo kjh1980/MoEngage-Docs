@@ -8,7 +8,10 @@ Installing the MoEngage library - Eclipse
 Step 1 - Get the latest MoEngage library release
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You must have received the latest MoEngage SDK from the team. If you have received the SDK, please proceed to the next steps.
+Download the sdk from the following page 
+
+http://docs.moengage.com/en/latest/download_sdks.html#android
+
 
 Step 2 - Import the SDK into your project's workspace
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
