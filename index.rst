@@ -12,7 +12,7 @@ The main documentation for the site is organized into the following sections:
     introduction
     android
     windows
-    transactional_api
     iOS
+    transactional_api
     download_sdks
     ecommerce
