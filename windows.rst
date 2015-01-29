@@ -8,7 +8,10 @@ Installing the MoEngage library - Visual Studio
 Step 1 - Get the latest MoEngage library release
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You must have received the latest MoEngage SDK from the team. If you have received the SDK, please proceed to the next steps. If not, please contact MoEngage team for help.
+Download the latest sdk from the following page
+
+http://docs.moengage.com/en/latest/download_sdks.html#windows
+
 
 Step 2 - Refer the dll file to your project
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
