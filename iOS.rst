@@ -342,3 +342,32 @@ In order to open "Deep Links" that are sent to the device as a Key/Value pair al
             // Here based on the extras key-value pair, you can open specific screens that's part of your app
     	}
     }
+    
+In-app Messaging 
+-----------------------------------------
+
+.. image:: images/InApp_iOS.png
+
+
+To use In-app Messaging, add the code below to the view controller(s) in which you want to show the In-app.
+
+
+::
+
+
+ 	[[MoEngage sharedInstance]handleInAppMessage];
+ 	[MoEngage sharedInstance].delegate = self;
+ 	
+To handle the button action for In-app, conform your view controller to MOInAppDelegate (optional). The method will provide the data which will help you to navigate screens or take appropriate actions.
+
+ ::
+ 
+ 
+ 	-(void)inAppButtonClickWithText:(NSString *)text andData:(NSDictionary *)dataDictionary{
+ 	// Here the dataDictionary will have the screen name and the key value pairs
+ 	}
+ 	
+Testing In-app Messaging
+-----------------------------------------
+
+In the dashboard, create an In-app Messaging campaign (Campaigns -> Create Campaign -> In-app Messaging). Now open the app to see the In app message popup.
