@@ -560,3 +560,43 @@ CheckList
 1. Make sure you have added **onStop()**, **onStart()**, **onPause()**, **onResume()** methods of MoEngage in all your activities.
 2. Test the Push Campaign on real device.
 3. Track Events comprehensively that meet your marketing goals.
+
+Common Issues faced when integrating SDK
+---------------------------------------------------
+
+**1. NoClassDefFound for com.delight.pushlibrary.R$layout**
+
+	Stack trace would look something like this
+
+::
+
+	java.lang.NoClassDefFoundError: Failed resolution of: Lcom/delight/pushlibrary/R$layout;
+	at com.moe.pushlibrary.MoEHelper.showInAppMessage(MoEHelper.java:388)
+	at com.moe.pushlibrary.MoEHelper.checkInAppMessage(MoEHelper.java:368)
+	at com.moe.pushlibrary.MoEHelper.access$3(MoEHelper.java:362)
+	at com.moe.pushlibrary.MoEHelper$4.onPostExecute(MoEHelper.java:293)
+	at com.moe.pushlibrary.MoEHelper$4.onPostExecute(MoEHelper.java:1)
+	at android.os.AsyncTask.finish(AsyncTask.java:632)
+	at android.os.AsyncTask.access$600(AsyncTask.java:177)
+	at android.os.AsyncTask$InternalHandler.handleMessage(AsyncTask.java:645)
+	at android.os.Handler.dispatchMessage(Handler.java:102)
+	at android.os.Looper.loop(Looper.java:135)
+	at android.app.ActivityThread.main(ActivityThread.java:5221)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at java.lang.reflect.Method.invoke(Method.java:372)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:899)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:694)
+	Caused by: java.lang.ClassNotFoundException: Didn't find class "com.delight.pushlibrary.R$layout" on path: DexPathList[[zip file "/data/app/com.xyz-1/base.apk"],nativeLibraryDirectories=[/data/app/com.xyz-1/lib/arm, /vendor/lib, /system/lib]]
+	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:469)
+	... 15 more
+	Suppressed: java.lang.ClassNotFoundException: com.delight.pushlibrary.R$layout
+	at java.lang.Class.classForName(Native Method)
+	at java.lang.BootClassLoader.findClass(ClassLoader.java:781)
+	at java.lang.BootClassLoader.loadClass(ClassLoader.java:841)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+	... 16 more
+	Caused by: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack available
+
+**Solution:** This happens when MoEngageSDK is not added as a library project. Please follow as stated in the setup guide.
