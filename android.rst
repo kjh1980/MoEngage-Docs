@@ -150,6 +150,23 @@ app package name.
         </intent-filter>
     </receiver>
 
+Handling multiple C2DM Receivers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+If you already have a C2DM Receiver and also want to retain it but still want to integrate MoEngage Push Message
+DONOT add *PushGcmBroadcastReceiver* to the manifest, instead you can use the hooks provided as follows:
+
+::
+
+	public class YourOwnBroadcastReceiver extends WakefulBroadcastReceiver{
+	
+	 	public void onReceive(Context context, Intent intent) {
+	 		PushGCMReceiverHook.onReceiveHook( context , intent );
+	 		//your own logic and everything
+	     	}
+	}
+
+*PushGCMReceiverHook* ensures that messages sent from ONLY MoEngage are handled. All other messages are ignored
+
 Requirements for Rich Landing pages through Push notifications (recommended)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
