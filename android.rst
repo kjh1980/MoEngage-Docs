@@ -18,6 +18,16 @@ Step 2 - Import the SDK into your project's workspace
 
 Import the SDK folder in to the project workspace and add it as a library project to your app.
 
+**Importing MoEngageSDK**
+
+.. image:: images/android_setup1.png
+
+
+**Adding it as a library project to your app**
+
+.. image:: images/android_setup2.png
+
+
 *Make sure that you have the latest android support jar file (android-support-v4.jar) accessable to the project.*
 
 Step 3 - Add permissions to your AndroidManifest.xml
