@@ -213,6 +213,7 @@ InApp Messages
 
 .. image:: images/FinalInAppMessaging.png
 
+
 In order to receive any InApp Messages, developer are just suppose to call a method [getInAppMessage] on any page they want to show InApp.
 
 ::
