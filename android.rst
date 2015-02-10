@@ -446,7 +446,23 @@ This helps us to attribute your users with the source through which users found 
             <action android:name="com.android.vending.INSTALL_REFERRER"/>
             </intent-filter>
     </receiver>
+    <service android:name="com.moe.pushlibrary.InstallSyncService" />
     
+Handling Multiple Install Referrers
+------------------------------------
+
+If you already have an install referrer then use the following code to track installs on MoEngage platform
+::
+
+	public class InstallReceiverProxy extends BroadcastReceiver{
+	
+	 	@Override
+		public void onReceive(Context arg0, Intent intent) {
+	    		//Your code for integration with other trackers
+	    		InstallSyncService.registerInstallation(getApplicationContext());
+	    }
+	}
+
 
 MoEngage Integration with HasOffers MAT (MobileAppTracking)
 ----------------------------------------------------------
