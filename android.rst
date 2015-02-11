@@ -446,7 +446,7 @@ This helps us to attribute your users with the source through which users found 
             <action android:name="com.android.vending.INSTALL_REFERRER"/>
             </intent-filter>
     </receiver>
-    <service android:name="com.moe.pushlibrary.InstallSyncService" />
+   
     
 Handling Multiple Install Referrers
 ------------------------------------
@@ -459,7 +459,7 @@ If you already have an install referrer then use the following code to track ins
 	 	@Override
 		public void onReceive(Context arg0, Intent intent) {
 	    		//Your code for integration with other trackers
-	    		InstallSyncService.registerInstallation(getApplicationContext());
+	    		InstallReceiver.registerInstallation(getApplicationContext());
 	    }
 	}
 
