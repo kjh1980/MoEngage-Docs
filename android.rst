@@ -293,6 +293,8 @@ For eg. the following code tracks a purchase event of a product. We are includin
     
 mCurrentContext - context instance, please change the name accordingly
 
+*The event name (in this case it is "Made Purchase") should not contain any special characters other than "_". It can contain just spaces and underscore*
+
 *Please make sure that you are tracking event attributes without changing their data types. For instance, in the above purchase event, amount and quantity are tracked in the numeric form. Our system detects the data type automatically unless you explicitly specify it as a string.*
 
 To pass location as one of the parameters for the event use the following code:
