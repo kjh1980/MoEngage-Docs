@@ -262,5 +262,5 @@ Developer can call this method in overidden method OnNavigatedTo(NavigationEvent
 In-App Smart Trigger Campaign
 -------------------------------------------------
 
-In order to get smart trigger In-App Campaign for any event,you need to call MoEngage.getInAppMessage(bool autoHandle) atleast once in app lifecycle which you might already be doing to get any In-App message.
+When you call MoEngage.getInAppMessage for the first time that does all the work for Smart In-App triggers,its been handled by our SDK and smart in-app message will be displayed automatically for any specified event.
 Also if you want to handle action button click event you can subscibe to MoEngage.InAppActionButtonClicked event.
