@@ -263,5 +263,4 @@ In-App Smart Trigger Campaign
 -------------------------------------------------
 
 In order to get smart trigger In-App Campaign for any event,you need to call MoEngage.getInAppMessage(bool autoHandle) atleast once in app lifecycle.
-
-
+Also if you want to handle action button click event you can subscibe to MoEngage.InAppActionButtonClicked event.
