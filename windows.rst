@@ -259,7 +259,7 @@ Developer can call this method in overidden method OnNavigatedTo(NavigationEvent
         MoEngage.getInAppMessage(false);
     }
     
-Note
+NOTE
 ^^^^    
 For In-App messages to work,make sure that other third party libraries are added as a reference to your project.
 
