@@ -208,7 +208,7 @@ To disable the push notificaitons use the following line
 
     MoEngage.PushNotificationsEnabled = false;
     
-InApp Messages
+In-App Campaign Messages
 -------------------------------------------------
 
 .. image:: images/FinalInAppMessaging.png
@@ -264,10 +264,13 @@ NOTE
 For In-App messages to work,make sure that other third party libraries are added as a reference to your project.
 
 Developer can add third party libraries either using Package Manager Console to get following Nuget packages:
+::
 
->Install-Package Microsoft.Net.Http
+    ->Install-Package Microsoft.Net.Http
 
->Install-Package Newtonsoft.Json
+::
+
+    ->Install-Package Newtonsoft.Json
 
 Or you can directly add a reference of all the third party libraries given by us along with our SDK.
     
