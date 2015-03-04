@@ -20,7 +20,11 @@ https://developer.apple.com/library/ios/technotes/iOSStaticLibraries/Articles/co
 
 Add the given header files (.h extensions) , by dragging and dropping the files in to your project.
 
-After these 2 steps you are all set to use the MoEngage Library now.
+Enable following compiler flag: -ObjC
+
+Select your project. Go to "Build Settings" ->"Linker" ->"Other Linker Flags" and add this flag.
+
+After these 3 steps you are all set to use the MoEngage Library now.
 
 App Delegate Changes
 ----------------------
