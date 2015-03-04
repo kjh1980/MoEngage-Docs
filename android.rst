@@ -459,9 +459,9 @@ If you already have an install referrer then use the following code to track ins
 	public class InstallReceiverProxy extends BroadcastReceiver{
 	
 	 	@Override
-		public void onReceive(Context arg0, Intent intent) {
+		public void onReceive(Context context, Intent intent) {
 	    		//Your code for integration with other trackers
-	    		InstallReceiver.registerInstallation(getApplicationContext());
+	    		InstallReceiver.registerInstallation(context, intent);
 	    }
 	}
 
