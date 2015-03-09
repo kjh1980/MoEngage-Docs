@@ -519,7 +519,9 @@ Reference: MobileAppTracking (MAT) Android Integration guide (https://developers
 
     
 GeoFencing (Optional - not recommended for all apps)
----------------------------------------------------
+----------------------------------------------------
+
+**Available from SDK version 4.1.2**
 
 To use geofencing, your app must request ACCESS_FINE_LOCATION. To request this permission, add the following element as a child element of the <manifest> element:
 
@@ -533,7 +535,7 @@ Add the following line to the manifest..
 
 ::
 
-    <service android:name="com.moe.geofence.MOEGeoFenceIntentService"></service>
+    <service android:name="com.moe.pushlibrary.GeofenceIntentService"></service>
     
 To setup geofences inside the application, call setGeoFences(lat, lng, context) method. lat and lng are the location around which you wish to set the geofences. Since you can only create a maximum of 90 geofences per app user, you can use the lat/lng to create the geofences required, if you want to create more than 90 geofences across all users.
 
