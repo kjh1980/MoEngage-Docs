@@ -380,3 +380,27 @@ Testing In-app Messaging
 -----------------------------------------
 
 In the dashboard, create an In-app Messaging campaign (Campaigns -> Create Campaign -> In-app Messaging). Now open the app to see the In app message popup.
+
+Releasing the app to the App Store
+-----------------------------------------
+
+MoEngage uses IDFA. Apple has guidelines on how developers can use IDFA.
+
+.. image:: images/iOS_IDFA.png
+
+When submitting your app to the app store, you have to disclose your IDFA uses:
+
+1. Serve advertisements within the app.
+- MoEngage does not serve ads. Plese check this box if you show ads in your app.
+
+2. Attribute this app installation to a previously served advertisement.
+- Please check this box. MoEngage uses IDFA for install attribution.
+
+3. Attribute an action taken within this app to a previously served advertisement
+- MoEngage does not attribute actions to advertisements.
+
+4. iOS Limit Ad Tracking
+- Please check this box. MoEngage SDK collects the iOS “Limit Ad Tracking” ("advertisingTrackingEnabled") flag when collecting IDFA. MoEngage fully complies with Apple requirement.
+
+Make sure that all your partners fully comply with this section before releasing the app to the App Store.  
+
