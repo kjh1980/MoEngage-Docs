@@ -15,16 +15,16 @@ http://docs.moengage.com/en/latest/download_sdks.html#ios
 Step 2 - Adding library and header files to the project 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Add the given library file (.a extension) to your project. Please check the following page for instructions.
+1. Add the given library file (.a extension) to your project. Please check the following page for instructions.
 https://developer.apple.com/library/ios/technotes/iOSStaticLibraries/Articles/configuration.html
 
-Add the given header files (.h extensions) , by dragging and dropping the files in to your project.
+2. Add the given header files (.h extensions) , by dragging and dropping the files in to your project.
 
-Enable following compiler flag: -ObjC
+3. Add the following compiler flag: -ObjC. Select your project. Go to "Build Settings" ->"Linker" ->"Other Linker Flags" and add this flag.
 
-Select your project. Go to "Build Settings" ->"Linker" ->"Other Linker Flags" and add this flag.
+4. Under Build Phases > Link Binary With Libraries - Add AdSupport.Framework. This is needed for IDFA.
 
-After these 3 steps you are all set to use the MoEngage Library now.
+After these 4 steps you are all set to use the MoEngage Library now.
 
 App Delegate Changes
 ----------------------
@@ -60,6 +60,11 @@ ApplicationID - a unique id will be provided to you from MoEngage. You can also 
 	- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 	{
     		[[MoEngage sharedInstance]registerForPush:deviceToken];
+	}
+	
+	-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+	{
+    		[[MoEngage sharedInstance]didFailToRegisterForPush];
 	}
 
 
