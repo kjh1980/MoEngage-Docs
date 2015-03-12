@@ -279,3 +279,18 @@ In-App Smart Trigger Campaign
 
 When you call MoEngage.getInAppMessage for the first time that does all the work for Smart In-App triggers,its been handled by our SDK and smart in-app message will be displayed automatically for any specified event.
 Also if you want to handle action button click event you can subscibe to MoEngage.InAppActionButtonClicked event.
+
+Known Issues
+--------------------------------------
+
+Issue 1: Below error pops up while adding MoEngageSDK.dll as a reference to your project.
+
+
+.. image:: images/WindowsKnownIssue1.PNG
+
+
+Solution 1: Go to the folder where you have downloaded our SDK and right click on it,go to properties and click 'Unblock'. Now add it again as a reference to your project.
+
+
+.. image:: images/WindowsSolution1.PNG
+
