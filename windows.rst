@@ -294,3 +294,14 @@ Solution 1: Go to the folder where you have downloaded our SDK and right click o
 
 .. image:: images/WindowsSolution1.PNG
 
+
+Issue 2 : App crashes when user clicks on push notification.
+
+
+.. image:: images/ScreenNamePushWindows.PNG
+
+
+Solution 2: One of the reason for this issue is that while creating Push Campaign,you must have entered wrong path to screen/page under 'ScreenName'.
+For ex. if you have Page located inside your 'Views' folder,then you should give ScreenName as 'Views/xyz.xaml',not just 'xyz.xml'.
+
+
