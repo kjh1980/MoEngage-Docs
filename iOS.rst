@@ -381,6 +381,54 @@ Testing In-app Messaging
 
 In the dashboard, create an In-app Messaging campaign (Campaigns -> Create Campaign -> In-app Messaging). Now open the app to see the In app message popup.
 
+Notification Center 
+-----------------------------------------
+
+
+.. image:: images/Inbox_iOS.png
+
+
+This is a drop in view controller which contains the read and unread push notifications. Even if the user has not clicked on a notification, it will be present in the Inbox and will be highlighted to signify it’s unread status. The title and the look and feel of the view is also customisable.
+
+Inbox view controller is added as a child view controller to your own controller. This helps you get the delegate callback in the same controller, which you can further use for navigation to different screens.
+
+How to use Inbox:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1. #import "MOInboxViewController.h" and "MOInbox.h" in your View Controller.
+
+2. Create a property - @property(nonatomic, strong) MOInboxViewController *myInboxController.
+
+3. In viewDidLoad, add 
+::
+
+	self.myInboxController = [MOInbox initializeInboxOnController:self];
+
+You are all set. This will add Inbox as a child controller to your view controller.
+
+Advanced settings:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1. You can push/present your controller. If you push your controller, make sure to add "Done" or "Cancel" button as a UIBarButtonItem to dismiss your View Controller.
+
+2. You can get the delegate callback of the click action on inbox cells:
+::
+	self.myInboxController.delegate = self;
+	
+	-(void)inboxCellSelectedWithData:(NSDictionary *)dataDict{
+    		NSLog(@"data dict on click is %@", dataDict);
+	}
+
+You can use this data for tracking events or navigation to another screen.
+
+3. You can customise the look and feel of the inbox view controller using the method:
+::
+
+	    [self.myInboxController customiseInboxWithCellTextColor:[UIColor blackColor] fontForReadMsg:[UIFont fontWithName:@"AvenirNext-Regular" size:18] fontForUnreadMsg:[UIFont fontWithName:@"AvenirNext-Bold" size:18] dateTextColor:[UIColor grayColor] font:nil cellBackgroundColor:[UIColor clearColor]];
+
+4. You can also change the frame of the Inbox as per your need, but you will have to ensure to remove the child controller if you wish to dismiss while staying in the same view.
+
+
+
+
 Releasing the app to the App Store
 -----------------------------------------
 
