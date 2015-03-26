@@ -377,9 +377,17 @@ To handle the button action for In-app, conform your view controller to MOInAppD
  	}
  	
 Testing In-app Messaging
------------------------------------------
-
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In the dashboard, create an In-app Messaging campaign (Campaigns -> Create Campaign -> In-app Messaging). Now open the app to see the In app message popup.
+
+Disabling In-app Messaging
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+If you do not wish to use in app messaging, set the property disableInApps. The property has te be set before the initialize call.
+
+::
+
+	[MoEngage sharedInstance].disableInApps = YES;
+	
 
 Notification Center 
 -----------------------------------------
@@ -392,7 +400,7 @@ This is a drop in view controller which contains the read and unread push notifi
 
 Inbox view controller is added as a child view controller to your own controller. This helps you get the delegate callback in the same controller, which you can further use for navigation to different screens.
 
-How to use Inbox:
+How to use Inbox
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 1. #import "MOInboxViewController.h" and "MOInbox.h" in your View Controller.
 
@@ -405,7 +413,7 @@ How to use Inbox:
 
 You are all set. This will add Inbox as a child controller to your view controller.
 
-Advanced settings:
+Advanced settings
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 1. You can push/present your controller. If you push your controller, make sure to add "Done" or "Cancel" button as a UIBarButtonItem to dismiss your View Controller.
 
@@ -426,8 +434,13 @@ You can use this data for tracking events or navigation to another screen.
 
 4. You can also change the frame of the Inbox as per your need, but you will have to ensure to remove the child controller if you wish to dismiss while staying in the same view.
 
+Disabling Inbox
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+If you wish to disable inbox, set the property disableInbox. This property has to be set before the initialze call.
+::
 
-
+	[MoEngage sharedInstance].disableInbox = YES;
+	
 
 Releasing the app to the App Store
 -----------------------------------------
