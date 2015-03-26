@@ -444,6 +444,7 @@ If you wish to disable inbox, set the property disableInbox. This property has t
 
 Releasing the app to the App Store
 -----------------------------------------
+In the production dashboard, go to App Settings > Miscellaneous, there is a checkbox for Production App. Please check this box while testing/releasing an app to the App Store.
 
 MoEngage uses IDFA. Apple has guidelines on how developers can use IDFA.
 
