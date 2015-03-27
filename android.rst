@@ -231,7 +231,7 @@ By default the SDK will update an exiting notification to keep the notification 
 
 If set then this would look like:
 
-image:: images/notification_type_multiple.png
+.. image:: images/notification_type_multiple.png
 
 **Setting Notification Tones**
 
