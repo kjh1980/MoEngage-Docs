@@ -229,9 +229,11 @@ By default the SDK will update an exiting notification to keep the notification 
 
     MoEHelper.setNotificationType(getApplicationContext(), NOTIFICATION_TYPE.MULTIPLE);
 
-If set then this would look like:
+By adding the above piece of code, the SDK would show notifications in the following way.
 
 .. image:: images/notification_type_multiple.png
+
+**Advanced:** If you would like to make these changes at runtime, we can also help you with that but the changes would be while creating campaigns and not while integration. But this feature is available on MoEngage SDKs 4.2.0 and above. Please let us know if you would like to do that
 
 **Setting Notification Tones**
 
@@ -241,6 +243,8 @@ By default the SDK uses the default notification tone. This can be customized us
     MoEHelper.setNotificationTone(getApplicationContext(), R.raw.tring);
 
 The audio resource should be present in */res/raw* folder.
+
+**Advanced:** If you would like to suppress notification tones for some campaigns, it can be done from the dashboard as well. Please let us know if you would like to do that
 
 Tracking user activity
 -------------------------
