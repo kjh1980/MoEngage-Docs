@@ -218,6 +218,29 @@ Put the following code after the above initialization code to register for push
     mHelper.Register(drawableResourceId);
     drawableResourceId - for eg. R.drawable.icon
 
+Customizing Notifications
+-------------------------
+*This is available from SDK versio 4.2.0 onwards*
+
+**Setting Notification Types**
+
+By default the SDK will update an exiting notification to keep the notification area uncluttered. But you can decide to switch to a mode where the app shows multiple notifications. But this has to be decided during the integration phase as to what you will need.
+::
+
+    MoEHelper.setNotificationType(getApplicationContext(), NOTIFICATION_TYPE.MULTIPLE);
+
+If set then this would look like:
+
+image:: images/notification_type_multiple.png
+
+**Setting Notification Tones**
+
+By default the SDK uses the default notification tone. This can be customized using the following code.
+::
+
+    MoEHelper.setNotificationTone(getApplicationContext(), R.raw.tring);
+
+The audio resource should be present in */res/raw* folder.
 
 Tracking user activity
 -------------------------
