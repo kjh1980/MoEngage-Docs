@@ -222,10 +222,10 @@ In order to receive any InApp Messages, developer are just suppose to call a met
     
 ::
 
-    MoEngage.getInAppMessage(bool autoHandle,int timeDelayBetweenInAppMessages ); // Only with SDK Version 1.2.1 
+    MoEngage.getInAppMessage(bool autoHandle,int timeDelayBetweenInAppMessages ); // Only with SDK Version 1.2.1 or above.
 
-The default time delay between two consecutive In-App Messages is 15 minutes [For both SDK 1.2.0 & 1.2.1].
-For SDK version 1.2.1 we are providing you an option to set it to any value greater than or equal to one.
+The default time delay between two consecutive In-App Messages is 15 minutes for both SDKs 1.2.0 & 1.2.1.
+For SDK version 1.2.1 or above, we are providing you an option to set it to any value greater than or equal to one.
 
 Set 'autoHandle' parameter to 'false' if you want to handle the InApp action button click event,otherwise if set to 'true' our SDK will handle the click event.
 
