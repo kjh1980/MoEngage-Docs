@@ -220,7 +220,7 @@ Put the following code after the above initialization code to register for push
 
 Customizing Notifications
 -------------------------
-*This is available from SDK versio 4.2.0 onwards*
+*This is available from SDK version 4.2.0 onwards*
 
 **Setting Notification Types**
 
