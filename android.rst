@@ -218,6 +218,14 @@ Put the following code after the above initialization code to register for push
     mHelper.Register(drawableResourceId);
     drawableResourceId - for eg. R.drawable.icon
 
+**To enable debug mode for the SDK please add the following code:**
+
+::
+
+    MoEHelper.APP_DEBUG = true;
+
+Don't forget to remove this before goin live.
+
 Customizing Notifications
 -------------------------
 *This is available from SDK version 4.2.0 onwards*
