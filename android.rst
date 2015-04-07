@@ -68,27 +68,43 @@ To enable Google Cloud Messaging (GCM) for Android, there are a few steps needed
 You will first need to turn on the Google Cloud Messaging Services from `Google's API Console page`_.
 If you do you not have a Google API project yet, the following pop up will appear prompting you to create a project.
 
-.. image:: images/1.png
+.. image:: images/gen_senderid_1.png
 
 Click on the "Create Project..." to create a new project. Once you have created a new project (or if you already have an existing project),
 you will be taken to the console's dashboard.
 
+.. image:: images/gen_senderid_2.png
+
 Once the project has been created, a page appears that displays your project ID and project number. The project number will be your
 twelve digit GCM Sender ID, which you will need to use in your code later to register your application for push notifications.
 
-From the Google API Console page, select "Services" from the left-hand navigation. Find "Google Cloud Messaging for Android" in the list of services,
-and turn it on by clicking the switch in the "Status" column.
+.. image:: images/gen_senderid_3.png
 
-.. image:: images/2.png
+From the Google API tab find "Cloud Messaging for Android" in the list of services.
 
-Create an Google API key. From the Google API Console page, select "Public API Access" from the left navigation and click "Create new Server key...". You should see the following pop up.
+.. image:: images/gen_senderid_4.png
 
-.. image:: images/3.png
+Click on it and Enable the API
 
-Click the create button. The next page will contain a "Simple API Access" header, and below the header a "Key for server apps" box.
-Your Google API key will appear in this box, after the heading "API Key:".
+.. image:: images/gen_senderid_5.png
 
-.. image:: images/4.png
+After enabling this is how it looks
+
+.. image:: images/gen_senderid_6.png
+
+To generate the GCM Key, navigate to 'Credentials' 
+
+.. image:: images/gen_senderid_7.png
+
+and click "Public API Access". You should see the following pop up.
+
+.. image:: images/gen_senderid_8.png
+
+Now Select the option 'Server Key' and don't enter any IP address in the provided box
+
+.. image:: images/gen_senderid_9.png
+
+Copy the generated GCM key and add it to the MoEngage Dashboard. Follow Step 2 for the update procedure.
 
 .. _Google's API Console page: https://cloud.google.com/console
 
