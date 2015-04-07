@@ -113,13 +113,13 @@ Handling Push Notifications
 ---------------------------
 
 To enable push notifications, add the following lines to your manifest
-file by replacing PACKAGE\_NAME with your package name, you have to
+file by replacing {PACKAGE\_NAME} with your package name, you have to
 replace the package name 3 times.
 
 ::
 
-    <permission android:name="PACKAGE_NAME.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-    <uses-permission android:name="PACKAGE_NAME.permission.C2D_MESSAGE" /> 
+    <permission android:name="{PACKAGE_NAME}.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="{PACKAGE_NAME}.permission.C2D_MESSAGE" /> 
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
@@ -129,15 +129,15 @@ replace the package name 3 times.
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-                <category android:name="PACKAGE_NAME" />
+                <category android:name="{PACKAGE_NAME}" />
             </intent-filter>
     </receiver>
     <service android:name="com.moe.pushlibrary.PushGCMIntentService" />
     <receiver android:name="com.moe.pushlibrary.PushGcmRegister" />
-    <receiver android:name="com.moe.pushlibrary.SendReport" />
+    <receiver android:name="com.moe.pushlibrary.SendReport" /> <!-- This is required for tracking events and impressions -->
 
-Gcm ids are refreshed after every update, to handle that please put the
-following code, note that the PACKAGE\_NAME has to be replaced with your
+GCM IDs are refreshed after every update, to handle that please put the
+following code, note that the {PACKAGE\_NAME} has to be replaced with your
 app package name.
 
 ::
@@ -145,7 +145,7 @@ app package name.
     <receiver android:name="com.moe.pushlibrary.PushUpdateReceiver">
     <intent-filter>
             <action android:name="android.intent.action.PACKAGE_REPLACED" />
-            <data android:path="PACKAGE_NAME"
+            <data android:path="{PACKAGE_NAME}"
                 android:scheme="package" />
         </intent-filter>
     </receiver>
@@ -309,6 +309,12 @@ Tracking your first event
 Once you've initialized the SDK, you can track an event using trackEvent with the event name and it's characteristics (attributes).
 Make sure you have implemented Tracking User Activity before you can track an event.
 
+**Event tracking will work only if you have the following component added in the manifest file:**
+
+::
+
+    <receiver android:name="com.moe.pushlibrary.SendReport" />
+
 Every event has 2 attributes, action name and key, value pairs which represent additional information about the action. Add all the additional information which you think would be useful for segmentation while creating campaigns.
 For eg. the following code tracks a purchase event of a product. We are including attributes like amount, quantity, category which describe the event we are tracking.
 
@@ -331,6 +337,7 @@ mCurrentContext - context instance, please change the name accordingly
 *The event name (in this case it is "Made Purchase") should not contain any special characters other than "_". It can contain just spaces and underscore*
 
 *Please make sure that you are tracking event attributes without changing their data types. For instance, in the above purchase event, amount and quantity are tracked in the numeric form. Our system detects the data type automatically unless you explicitly specify it as a string.*
+
 
 To pass location as one of the parameters for the event use the following code:
 
