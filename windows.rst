@@ -280,7 +280,9 @@ Developer can add third party libraries either using Package Manager Console to 
 
 Or you can directly add a reference of all the third party libraries given by us along with our SDK.
 
-Also add moe_close.png image from SDK's Assets Folder to your project's Assets Folder.
+::
+
+    Also add moe_close.png image from SDK's Assets Folder to your project's Assets Folder.
     
 In-App Smart Trigger Campaign
 -------------------------------------------------
