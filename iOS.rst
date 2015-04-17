@@ -389,6 +389,21 @@ If you do not wish to use in app messaging, set the property disableInApps. The 
 	[MoEngage sharedInstance].disableInApps = YES;
 	
 
+Nudges
+-----------------------------------------
+
+Nudges are banner like views. They can be embedded in the current view or floated over the existing view.
+
+::
+
+	[MoEngage sharedInstance]getNudgeView;
+
+This will provide a UIView. If you are calling it on the first screen, you can observe for a notification which will tell notify as soon as the nudge view is available.
+::
+	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(nudgeAvailable) name:@"NudgeAvailable" object:nil];
+	
+	
+	
 Notification Center 
 -----------------------------------------
 
